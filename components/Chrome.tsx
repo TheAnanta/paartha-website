@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "support@paartha.theananta.dev";
+export const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "paartha@theananta.in";
 
 export function Header() {
   return (
