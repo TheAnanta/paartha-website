@@ -1,4 +1,4 @@
-:root { --ink:#1d1b20; --muted:#00000099; --cream:#faf4f2; --line:#00000014; --black:#000; --white:#fff; }
+:root { --shibuya:#24527a; --nautilus:#263a61; --mustard:#d4a72c; --couture:#9e2a2b; --open-book:#f5f0e6; --black-pearl:#20252b; --ink:var(--black-pearl); --muted:#20252b99; --cream:var(--open-book); --line:#20252b14; --black:var(--black-pearl); --white:#fff; }
 * { box-sizing: border-box; }
 html { color-scheme: light; }
 body { margin:0; font-family: "Funnel Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--white); line-height: 1.6; }
