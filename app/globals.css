@@ -21,12 +21,35 @@ footer.site a { margin-right: 18px; }
 .card h3 { margin: 0 0 6px; font-size: 18px; }
 .card p { margin: 0; color: var(--muted); }
 h2.section { font-size: 28px; letter-spacing: -0.5px; margin: 56px 0 4px; }
-.doc { max-width: 720px; margin: 0 auto; padding: 8px 24px 0; }
-.doc h1 { font-size: 34px; letter-spacing: -0.8px; }
-.doc h2 { font-size: 20px; margin: 32px 0 6px; }
-.doc .meta { color: var(--muted); font-size: 14px; }
-.doc .note { background: var(--cream); border-radius: 14px; padding: 14px 16px; }
 details { border-bottom: 1px solid var(--line); padding: 16px 0; }
 summary { cursor: pointer; font-weight: 600; font-size: 17px; }
 details p { color: var(--muted); margin: 10px 0 0; }
 @media (max-width: 760px) { .hero { grid-template-columns: 1fr; } header.site nav a { margin-left: 12px; } }
+
+/* Legal pages: contents beside the text on wide screens, in the style of a policy page. */
+.legal { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: 48px; align-items: start; padding-top: 8px; }
+.legal .toc { position: sticky; top: 24px; max-height: calc(100vh - 48px); overflow: auto; font-size: 14px; }
+.legal .toc h3 { font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 12px; }
+.legal .toc ol { list-style: none; margin: 0; padding: 0; border-left: 2px solid var(--line); }
+.legal .toc li a { display: block; padding: 6px 0 6px 14px; margin-left: -2px; border-left: 2px solid transparent; color: var(--muted); text-decoration: none; line-height: 1.35; }
+.legal .toc li a:hover { color: var(--black); border-left-color: var(--black); }
+.legal .doc { max-width: 760px; margin: 0; padding: 0; }
+.doc h1 { font-size: 40px; line-height: 1.1; letter-spacing: -1px; margin: 8px 0 8px; }
+.doc h2 { font-size: 24px; letter-spacing: -.4px; margin: 48px 0 8px; scroll-margin-top: 24px; }
+.doc h3 { font-size: 17px; margin: 28px 0 6px; }
+.doc p, .doc li { font-size: 16px; line-height: 1.65; color: #2c2c2c; }
+.doc li { margin: 6px 0; }
+.doc a { text-underline-offset: 3px; }
+.doc table { width: 100%; border-collapse: collapse; margin: 16px 0 24px; font-size: 15px; }
+.doc th, .doc td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--line); }
+.doc th { background: var(--cream); font-size: 13px; letter-spacing: .03em; }
+.doc table.summary td:first-child { width: 36%; }
+.doc table.summary { background: var(--cream); border-radius: 16px; overflow: hidden; }
+.doc table.summary td { border-bottom: 1px solid #00000010; }
+.doc .note { background: var(--cream); border-radius: 14px; padding: 14px 16px; }
+.embed .doc { padding: 20px 20px 0; }
+.embed .doc h1 { font-size: 28px; }
+.embed .doc h2 { font-size: 20px; margin-top: 36px; }
+.embed .doc table { display: block; overflow-x: auto; }
+@media (max-width: 900px) { .legal { grid-template-columns: 1fr; gap: 8px; } .legal .toc { position: static; max-height: none; margin-bottom: 8px; } .doc h1 { font-size: 30px; } }
+.doc .meta { color: var(--muted); font-size: 14px; }
