@@ -26,7 +26,7 @@ export default function Home() {
             {PLAY_STORE && <a className="btn ghost" href={PLAY_STORE}>Get it on Google Play</a>}
             {!APP_STORE && !PLAY_STORE && <Link className="btn" href="/support">Need help?</Link>}
           </div>
-          <div className="art">Hero artwork goes here</div>
+          <div className="art"><img src="/site_hero.png" alt="Students studying together with Paartha" /></div>
         </section>
 
         <h2 className="section">Everything for an exam you are sure to ace</h2>

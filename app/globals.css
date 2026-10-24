@@ -92,3 +92,6 @@ details p { color: var(--muted); margin: 10px 0 0; }
 .history em { font-style: normal; color: var(--muted); }
 @media (max-width: 640px) { .acct-grid { grid-template-columns: 1fr; } }
 @media (max-width: 560px) { header.site { flex-wrap: wrap; gap: 8px; } header.site nav a { margin-left: 0; margin-right: 14px; } }
+
+.hero .art { padding: 0; overflow: hidden; background: var(--cream); }
+.hero .art img { display: block; width: 100%; height: auto; }
