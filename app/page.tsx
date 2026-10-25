@@ -1,8 +1,7 @@
 import { Footer, Header } from "@/components/Chrome";
 import Link from "next/link";
+import { APP_STORE_URL as APP_STORE, PLAY_STORE_URL as PLAY_STORE } from "@/lib/stores";
 
-const APP_STORE = process.env.NEXT_PUBLIC_APP_STORE_URL;
-const PLAY_STORE = process.env.NEXT_PUBLIC_PLAY_STORE_URL;
 
 const features = [
   { t: "Notes", d: "Handwritten, exam-focused notes you can read in the app, with a table of contents and bookmarks." },

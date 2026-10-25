@@ -1,7 +1,6 @@
 "use client";
 
-const APP_STORE = process.env.NEXT_PUBLIC_APP_STORE_URL;
-const PLAY_STORE = process.env.NEXT_PUBLIC_PLAY_STORE_URL;
+import { APP_STORE_URL as APP_STORE, PLAY_STORE_URL as PLAY_STORE } from "@/lib/stores";
 
 /**
  * The store buttons on an invitation. Pressing one first copies `paartha-invite:<username>` to the clipboard; the app reads it
