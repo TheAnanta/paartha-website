@@ -61,7 +61,14 @@ export default function AccountClient() {
       }
     } catch (e) {
       const code = (e as { code?: string }).code ?? "";
-      if (code !== "auth/popup-closed-by-user" && code !== "auth/cancelled-popup-request") setMessage({ kind: "bad", text: "We couldn't sign you in. Please try again." });
+      if (code !== "auth/popup-closed-by-user" && code !== "auth/cancelled-popup-request") {
+        console.error("Sign-in failed:", e);
+        // A blocked pop-up and a domain that Firebase doesn't know are the two things a visitor can actually fix or report.
+        const text = code === "auth/popup-blocked"
+          ? "Your browser blocked the sign-in window. Allow pop-ups for this site and try again."
+          : `We couldn't sign you in. Please try again.${code ? ` (${code})` : ""}`;
+        setMessage({ kind: "bad", text });
+      }
     } finally {
       setSigningIn(false);
     }
