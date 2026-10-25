@@ -40,17 +40,17 @@ export default function DeleteAccount() {
           <li>Your study activity, progress, streaks, quiz attempts and bookmarks.</li>
           <li>Your mudra balance and mudra history.</li>
           <li>Your reviews, support conversations and the images in them, notifications, cart and applied coupon.</li>
-          <li>Your enrolments and course purchases, and the payment records linked to your account (they are removed with the account).</li>
+          <li>Your enrolments and the link between you and your payments. The payment records themselves stay, without anything that identifies you (see below).</li>
           <li>Your push notification token.</li>
         </ul>
-        <p><strong>Deleting is permanent.</strong> Courses you paid for are not refunded and cannot be restored, and unspent mudras are lost. To get access again you would create a new account.</p>
+        <p><strong>Deleting is permanent.</strong> Because the payment records no longer say who you are, they can&rsquo;t be used to restore your account. Courses you paid for are not refunded, and unspent mudras are lost. To get access again you would create a new account.</p>
 
         <h2 className="section" style={{ fontSize: 24 }}>What we keep, and for how long</h2>
         <ul>
+          <li><strong>Payment and tax records:</strong> for each payment we keep the date, the course, the amount, the tax and the payment provider&rsquo;s payment ID, for as long as accounting and tax law requires (generally up to eight years). When your account is deleted these records are cut loose from it: your name, email, roll number, username and UPI ID are removed, and nothing in them points back to you.</li>
           <li><strong>Backups:</strong> deleted data can remain in routine backups for a short period before it is overwritten.</li>
           <li><strong>Payment provider:</strong> Razorpay, which processes card and UPI payments, keeps its own records of payments under its own legal obligations and privacy policy. We don&rsquo;t control those.</li>
           <li><strong>Sign-in provider:</strong> the Google or Apple account you signed in with is yours and is not deleted. Paartha only loses the link to it.</li>
-          <li>Anything we are required by law to keep (for example, tax records of a payment) stays for as long as that law says.</li>
         </ul>
         <p>You can read how we handle data in our <a href="/privacy">Privacy Policy</a>. Questions? Write to <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>.</p>
       </main>
