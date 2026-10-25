@@ -11,14 +11,14 @@ export const FAQ = [
     group: "Courses and learning",
     items: [
       { q: "What is in a course?", a: "Each unit has video lectures, notes, important questions, flashcards, mind maps and a quiz." },
-      { q: "How does the quiz work?", a: "Every attempt shows five questions drawn from the unit's bank. Score above 90% on your first attempt to earn 10 mudras, or on your second attempt to earn 5." },
+      { q: "How does the quiz work?", a: "Every attempt shows five questions drawn from the unit's bank. Quizzes are for practice and grading: they show how ready you are, and they do not earn mudras on their own." },
       { q: "Why is a unit locked?", a: "The first unit of a course is free; the others open once you buy the course." },
     ],
   },
   {
     group: "Mudras",
     items: [
-      { q: "What are mudras?", a: "Virtual currency you earn by studying (daily check-in, videos, notes, important questions, quizzes). Some are promotional and some are earned by effort." },
+      { q: "What are mudras?", a: "Virtual currency you earn for study effort that adds up: a daily streak, finishing five resources in a day, completing a unit or a whole course, and more. Some are promotional and some are earned by effort." },
       { q: "How many mudras can I use on a course?", a: "Promotional mudras cover up to 250 mudras (₹25) of each course. Mudras you earned by effort can cover more, up to the whole price." },
       { q: "How do I manage my account or mudras?", a: "Sign in to your account on this website from the Account page." },
     ],
