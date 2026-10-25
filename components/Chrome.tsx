@@ -24,6 +24,7 @@ export function Footer() {
         <Link href="/support">Support</Link>
         <Link href="/terms">Terms &amp; Conditions</Link>
         <Link href="/privacy">Privacy Policy</Link>
+        <Link href="/delete-account">Delete account</Link>
         <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
       </div>
     </footer>
