@@ -270,3 +270,9 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .badge.arch { border-radius: 50% 50% 8px 8px; background: #24527a; color: var(--open-book); }
 .badge.diamond { background: none; position: relative; color: var(--mustard); } .badge.diamond::before { content: ""; position: absolute; inset: 5px; background: var(--nautilus); border-radius: 6px; transform: rotate(45deg); } .badge.diamond svg { position: relative; }
 .badge.burst { border-radius: 14px; background: var(--couture); color: var(--open-book); }
+
+.sceneimg { display: block; width: 100%; height: auto; position: relative; z-index: 1; }
+.scene { padding-top: 56px; }
+.scene { padding-top: 96px; }
+.bub.b1 { top: 6px; } .bub.b2 { top: 50px; } .bub.b3 { top: 6px; } .bub.b4 { top: 50px; }
+@media (max-width: 700px) { .scene { padding-top: 96px; } .bub.b1, .bub.b3 { top: 4px; } .bub.b2, .bub.b4 { top: 40px; } }

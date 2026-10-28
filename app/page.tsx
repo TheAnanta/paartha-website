@@ -122,15 +122,7 @@ export default function Home() {
               <span className="bub b2">Where do I even start?</span>
               <span className="bub b3 ok">Important questions, by marks</span>
               <span className="bub b4 ok">The cheatsheet is ready</span>
-              <div className="cast">
-                <img src="/home/char_3_foryou.webp" alt="" width={515} height={700} loading="lazy" />
-                <img src="/home/char_1_learn.webp" alt="" width={476} height={700} loading="lazy" />
-                <div className="mini"><img src="/home/slide_2.webp" alt="Paartha showing what to study next" width={600} height={1304} loading="lazy" /></div>
-                <img src="/home/char_5_breathe.webp" alt="" width={386} height={700} loading="lazy" />
-                <img src="/home/char_4_mudras.webp" alt="" width={539} height={700} loading="lazy" />
-                <img src="/home/char_6_profile.webp" alt="" width={372} height={700} loading="lazy" />
-              </div>
-              <div className="floor" />
+              <img className="sceneimg" src="/home/scene.webp" alt="Six friends cramming the night before an exam, relieved as Paartha shows them what to study and a mudra shines above them" width={1600} height={900} loading="lazy" />
             </div>
           </div>
         </section>
