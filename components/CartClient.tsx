@@ -2,7 +2,7 @@
 
 import { signOut, type User } from "firebase/auth";
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import StudentGate from "@/components/StudentGate";
 import { availability, day, inr, Members, Thumb } from "@/components/shop";
 import { auth } from "@/lib/firebase";
@@ -20,6 +20,16 @@ function CartPage({ user }: { user: User }) {
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [paid, setPaid] = useState<Course[] | null>(null);
+  // The mobile "Pay now" bar scrolls to the summary and hides while the summary is on screen.
+  const summaryRef = useRef<HTMLElement>(null);
+  const [summaryShown, setSummaryShown] = useState(false);
+  useEffect(() => {
+    const el = summaryRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(([e]) => setSummaryShown(e.isIntersecting), { threshold: 0.3 });
+    io.observe(el);
+    return () => io.disconnect();
+  });
 
   const load = useCallback(async () => {
     const token = await user.getIdToken();
@@ -81,8 +91,14 @@ function CartPage({ user }: { user: User }) {
   const moreRegular = more.reduce((s, c) => s + c.regular_price, 0);
   const savings = (cart?.items ?? []).reduce((s, c) => s + Math.max(0, c.regular_price - c.price), 0);
 
+  const AddAll = () => (
+    <button className="addall" disabled={busy !== null} onClick={() => addAll(more.map((c) => c.id))}>
+      {busy === more.map((c) => c.id).join(",") ? "Adding…" : `Add all ${more.length} for ${inr(moreTotal)}`}
+    </button>
+  );
+
   return (
-    <>
+    <div className="cartpage">
       <div className="acct-hero" style={{ marginTop: 24 }}>
         <h1 style={{ fontSize: 40, letterSpacing: -1, margin: 0 }}>Your cart</h1>
         <Link className="acct-link" href="/courses">All courses</Link>
@@ -111,10 +127,13 @@ function CartPage({ user }: { user: User }) {
 
             {more.length > 0 && (
               <section>
-                <h2 className="section" style={{ marginTop: 28 }}>Add more courses</h2>
+                <div className="morehead">
+                  <h2 className="section" style={{ margin: 0 }}>Add more courses</h2>
+                  {more.length > 1 && <AddAll />}
+                </div>
                 <p className="muted small">Your other courses, at the pre-registration price. Add them now, before the price goes up.</p>
                 {more.map((c) => (
-                  <article className="ccard line" key={c.id}>
+                  <article className="ccard line more" key={c.id}>
                     <Thumb c={c} />
                     <div className="lmain">
                       <div className="ctop"><span className="tag">{c.code}</span></div>
@@ -137,7 +156,7 @@ function CartPage({ user }: { user: User }) {
             )}
           </div>
 
-          <aside className="cartbox">
+          <aside className="cartbox" ref={summaryRef}>
             <h2>Summary</h2>
             <dl className="sum">
               <dt>Subtotal ({cart.items.length} course{cart.items.length === 1 ? "" : "s"})</dt><dd>{inr(cart.subtotal)}</dd>
@@ -153,6 +172,12 @@ function CartPage({ user }: { user: User }) {
           </aside>
         </div>
       )}
-    </>
+    {cart && cart.items.length > 0 && (
+        <div className={`paybar${summaryShown ? " gone" : ""}`}>
+          <b>{inr(cart.total)}</b>
+          <button onClick={() => summaryRef.current?.scrollIntoView({ behavior: "smooth", block: "end" })}>Pay now</button>
+        </div>
+      )}
+    </div>
   );
 }
