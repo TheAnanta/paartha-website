@@ -33,21 +33,13 @@ export const PLAN = {
   features: ["content unlocked for unit 3-5", "access to handwritten notes", "access to fast prep cheatsheets", "access to important and PYQs"],
 };
 
-/** This browser's stand-in for a phone's device id; the account binds to it the way it binds to a phone. */
-export function deviceId(): string {
-  try {
-    let id = localStorage.getItem("paartha-web-device");
-    if (!id) { id = `web-${crypto.randomUUID()}`; localStorage.setItem("paartha-web-device", id); }
-    return id;
-  } catch {
-    return "web-session";
-  }
-}
+/** Marks a request as coming from the website: the API skips the device check and never binds a device for it. */
+const WEB_ID = "paartha-website";
 
 async function call<T>(token: string, method: string, path: string, body?: unknown): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
     method,
-    headers: { authorization: `Bearer ${token}`, "content-type": "application/json", "x-platform": "web", "x-device-id": deviceId() },
+    headers: { authorization: `Bearer ${token}`, "content-type": "application/json", "x-platform": "web", "x-web-id": WEB_ID },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
   const json = res.status === 204 ? {} : await res.json().catch(() => ({}));
@@ -56,12 +48,15 @@ async function call<T>(token: string, method: string, path: string, body?: unkno
 }
 
 export const startSession = (token: string, photoUrl?: string | null) =>
-  call<Session>(token, "POST", "/auth/session", { device_id: deviceId(), ...(photoUrl?.startsWith("https://") ? { photo_url: photoUrl } : {}) });
+  call<Session>(token, "POST", "/auth/session", { ...(photoUrl?.startsWith("https://") ? { photo_url: photoUrl } : {}) });
 export const signUp = (token: string, b: { name: string; roll_number: string; invited_by?: string; photo_url?: string | null }) =>
-  call<unknown>(token, "POST", "/auth/sign-up", { name: b.name, roll_number: b.roll_number, invited_by: b.invited_by || undefined, device_id: deviceId(), ...(b.photo_url?.startsWith("https://") ? { photo_url: b.photo_url } : {}) });
+  call<unknown>(token, "POST", "/auth/sign-up", { name: b.name, roll_number: b.roll_number, invited_by: b.invited_by || undefined, ...(b.photo_url?.startsWith("https://") ? { photo_url: b.photo_url } : {}) });
 export const listCourses = (token: string) => call<Course[]>(token, "GET", "/courses");
 export const getCart = (token: string) => call<Cart>(token, "GET", "/cart");
 export const addToCart = (token: string, id: string) => call<Cart>(token, "PUT", `/cart/items/${encodeURIComponent(id)}`);
 export const startPayment = (token: string) => call<PaymentStart>(token, "POST", "/payments");
 export const verifyPayment = (token: string, id: string, proof: { razorpay_payment_id: string; razorpay_signature: string } | {}) =>
   call<{ id: string; courses: Course[]; subtotal: number; tax: number }>(token, "POST", `/payments/${id}/verify`, proof);
+export const removeFromCart = (token: string, id: string) => call<Cart>(token, "DELETE", `/cart/items/${encodeURIComponent(id)}`);
+/** course id -> how many students are shown as taking it. */
+export const getCensus = (token: string) => call<Record<string, number>>(token, "GET", "/courses/census");

@@ -165,3 +165,7 @@ h2.section.light, .lede2.light { color: #fff; }
 .sug { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 0; } .sug div { display: grid; }
 .fld { display: grid; gap: 4px; margin: 12px 0; font-weight: 600; } .fld input { font: inherit; font-weight: 400; padding: 12px 14px; border-radius: 12px; border: 1.5px solid var(--line); background: #fff; }
 @media (max-width: 820px) { .shop { grid-template-columns: 1fr; } .cartbox { position: static; } }
+.chip { align-self: flex-start; background: #fff; border-radius: 999px; padding: 2px 12px; font-size: 13px; font-weight: 600; color: var(--nautilus); }
+.ccard.line { flex-direction: row; justify-content: space-between; align-items: center; margin: 12px 0; gap: 16px; }
+.ccard.line .lend { text-align: right; display: grid; gap: 6px; justify-items: end; }
+@media (max-width: 520px) { .ccard.line { flex-direction: column; align-items: flex-start; } .ccard.line .lend { justify-items: start; text-align: left; } }
