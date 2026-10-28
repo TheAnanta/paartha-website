@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import StudentGate from "@/components/StudentGate";
 import { auth } from "@/lib/firebase";
 import { addToCart, type Course, getCart, getCensus, listCourses, PLAN } from "@/lib/student";
-import { blurb, availability, day, inr, Members } from "@/components/shop";
+import { availability, blurb, CourseImage, day, Desc, inr, Members } from "@/components/shop";
 
 export default function CoursesClient() {
   return <StudentGate>{(user) => <Courses user={user} />}</StudentGate>;
@@ -84,9 +84,10 @@ function Courses({ user }: { user: User }) {
           <div className="clist">
             {list.map((c) => (
               <article className="ccard" key={c.id}>
+                <CourseImage c={c} />
                 <div className="ctop"><span className="tag">{c.code}</span><span className="tag out">{PLAN.tag}</span></div>
                 <h3>{c.title}</h3>
-                <p className="muted small">{blurb(c)}</p>
+                <Desc text={blurb(c)} />
                 <Members n={census[c.id]} />
                 <p className="avail">{availability(c.available_from)}</p>
                 <div className="cbuy">

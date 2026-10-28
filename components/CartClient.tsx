@@ -4,7 +4,7 @@ import { signOut, type User } from "firebase/auth";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import StudentGate from "@/components/StudentGate";
-import { availability, day, inr, Members } from "@/components/shop";
+import { availability, day, inr, Members, Thumb } from "@/components/shop";
 import { auth } from "@/lib/firebase";
 import { openCheckout } from "@/lib/razorpay";
 import { addToCart, type Cart, type Course, getCart, getCensus, listCourses, removeFromCart, startPayment, verifyPayment } from "@/lib/student";
@@ -95,7 +95,8 @@ function CartPage({ user }: { user: User }) {
             {cart.items.length === 0 && <p className="muted">Your cart is empty. Add a course below, or <Link href="/courses">browse your courses</Link>.</p>}
             {cart.items.map((c) => (
               <article className="ccard line" key={c.id}>
-                <div>
+                <Thumb c={c} />
+                <div className="lmain">
                   <div className="ctop"><span className="tag">{c.code}</span><span className="tag out">Pre-registration</span></div>
                   <h3>{c.title}</h3>
                   <Members n={census[c.id]} />
@@ -114,7 +115,8 @@ function CartPage({ user }: { user: User }) {
                 <p className="muted small">Your other courses, at the pre-registration price. Add them now, before the price goes up.</p>
                 {more.map((c) => (
                   <article className="ccard line" key={c.id}>
-                    <div>
+                    <Thumb c={c} />
+                    <div className="lmain">
                       <div className="ctop"><span className="tag">{c.code}</span></div>
                       <h3>{c.title}</h3>
                       <Members n={census[c.id]} />

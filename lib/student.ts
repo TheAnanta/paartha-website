@@ -7,6 +7,9 @@ export interface Course {
   title: string;
   category: string;
   description: string;
+  image: string;
+  image_color: string | null;
+  thumbnail: string | null;
   price: number;
   regular_price: number;
   purchased: boolean;
