@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Footer, Header } from "@/components/Chrome";
+import PreRegisterButton from "@/components/PreRegisterButton";
 import { FAQ } from "@/content/faq";
 import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/stores";
 
@@ -44,8 +45,8 @@ export default function Home() {
             <p className="eyebrow">Exam prep for university students</p>
             <h1>Know what to study next, even the night before your exam.</h1>
             <p className="lede">Notes, important questions, flashcards and quizzes for every unit, and a study plan built around your exam dates.</p>
-            <Stores />
-            <p className="fine">The first unit of every course is free to try.</p>
+            <PreRegisterButton />
+            <p className="fine">Courses open on 1 Nov 2026. Pre-register now at a lower price.</p>
           </div>
           <div className="art2"><img src="/home/hero.webp" alt="Two phones showing the Paartha app, with two of the Paartha students beside them" width={1400} height={1100} /></div>
         </section>
@@ -112,7 +113,7 @@ export default function Home() {
           <img className="side" src="/home/faq.webp" alt="" loading="lazy" />
         </section>
 
-        <section className="cta">
+        <section className="cta" id="download">
           <div className="wrap">
             <h2>Download Paartha</h2>
             <p>Your partner for exam success.</p>
