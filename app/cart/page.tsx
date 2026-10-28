@@ -6,8 +6,8 @@ export const metadata = { title: "Your cart" };
 export default function Cart() {
   return (
     <>
-      <Header />
-      <main className="wrap" style={{ maxWidth: 980 }}>
+      <Header cta={false} />
+      <main className="wrap">
         <CartClient />
       </main>
       <Footer />

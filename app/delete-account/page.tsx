@@ -11,7 +11,7 @@ export default function DeleteAccount() {
   return (
     <>
       <Header />
-      <main className="wrap" style={{ maxWidth: 760 }}>
+      <main className="wrap">
         <h1 style={{ fontSize: 40, letterSpacing: -1 }}>Delete your Paartha account and data</h1>
         <p style={{ color: "var(--muted)" }}>
           This page is for the <strong>Paartha</strong> app (by <strong>the ananta</strong>, <code>dev.theananta.paartha</code> on Google Play and the App Store). You can delete your whole account, or only some of your data, yourself, or ask us to do it.

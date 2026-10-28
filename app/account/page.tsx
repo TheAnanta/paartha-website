@@ -7,7 +7,7 @@ export default function Account() {
   return (
     <>
       <Header />
-      <main className="wrap" style={{ maxWidth: 760 }}>
+      <main className="wrap">
         <h1 style={{ fontSize: 40, letterSpacing: -1 }}>Your account</h1>
         <AccountClient />
       </main>

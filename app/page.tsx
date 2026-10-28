@@ -1,8 +1,10 @@
 import Link from "next/link";
 import { Footer, Header } from "@/components/Chrome";
 import PreRegisterButton from "@/components/PreRegisterButton";
+import Stores from "@/components/Stores";
+import Strip from "@/components/Strip";
+import { CalendarCheck, ClipboardCheck, FileText, ListChecks, Network, Zap } from "lucide-react";
 import { FAQ } from "@/content/faq";
-import { APP_STORE_URL, PLAY_STORE_URL } from "@/lib/stores";
 
 export const metadata = {
   title: "Paartha: know what to study next",
@@ -17,45 +19,46 @@ const why = [
 ];
 
 const inside = [
-  { t: "Notes", d: "Exam-focused notes you read page by page, with bookmarks." },
-  { t: "Important questions", d: "Grouped by marks, per unit, with model answers." },
-  { t: "Cheatsheets and flashcards", d: "Fast-prep sheets for the night before the exam." },
-  { t: "Quizzes", d: "Five fresh questions each attempt, graded straight away." },
-  { t: "Mind maps", d: "See how topics connect; tap a node for the definition." },
-  { t: "Study plan", d: "A week plan that puts the best resources first." },
+  { t: "Notes", I: FileText, d: "Exam-focused notes you read page by page, with bookmarks." },
+  { t: "Important questions", I: ListChecks, d: "Grouped by marks, per unit, with model answers." },
+  { t: "Cheatsheets and flashcards", I: Zap, d: "Fast-prep sheets for the night before the exam." },
+  { t: "Quizzes", I: ClipboardCheck, d: "Five fresh questions each attempt, graded straight away." },
+  { t: "Mind maps", I: Network, d: "See how topics connect; tap a node for the definition." },
+  { t: "Study plan", I: CalendarCheck, d: "A week plan that puts the best resources first." },
 ];
-
-function Stores({ light = false }: { light?: boolean }) {
-  return (
-    <div className="stores">
-      <a className={light ? "btn light" : "btn"} href={APP_STORE_URL}>Download on the App Store</a>
-      <a className={light ? "btn light ghost" : "btn ghost"} href={PLAY_STORE_URL}>Get it on Google Play</a>
-    </div>
-  );
-}
 
 export default function Home() {
   const faq = FAQ.flatMap((g) => g.items).filter((i) => !/stuck|ticket|refund|language/i.test(i.q)).slice(0, 8);
   return (
     <>
-      <Header />
+      <Header cta={false} />
       <main>
-        <section className="wrap hero2">
-          <div>
+        <section className="wrap hero3">
+          <div className="h3copy">
             <p className="eyebrow">Exam prep for university students</p>
             <h1>Know what to study next, even the night before your exam.</h1>
             <p className="lede">Notes, important questions, flashcards and quizzes for every unit, and a study plan built around your exam dates.</p>
             <PreRegisterButton />
             <p className="fine">Courses open on 1 Nov 2026. Pre-register now at a lower price.</p>
           </div>
-          <div className="art2"><img src="/home/hero.webp" alt="Two phones showing the Paartha app, with two of the Paartha students beside them" width={1400} height={1100} /></div>
+          <div className="stage">
+            <img className="hc c4" src="/home/char_4_mudras.webp" alt="" width={539} height={700} />
+            <div className="ramp" />
+            <div className="phone"><img src="/home/slide_1.webp" alt="The Paartha app" width={600} height={1304} /></div>
+            <img className="hc c5" src="/home/char_5_breathe.webp" alt="A Paartha student pushing a phone up a ramp" width={386} height={700} />
+            <img className="hc c1" src="/home/char_1_learn.webp" alt="" width={476} height={700} />
+            <div className="ground" />
+          </div>
         </section>
 
-        <section className="wrap proof" aria-label="At a glance">
-          <div><b>19</b><span>courses</span></div>
-          <div><b>5</b><span>units in every course</span></div>
-          <div><b>5</b><span>kinds of resource in every unit</span></div>
-          <div><b>1 Nov</b><span>2026, when the first courses open</span></div>
+        <section className="wrap glance" aria-label="Paartha at a glance">
+          <h2 className="section" style={{ marginTop: 40 }}>Your semester, laid out</h2>
+          <dl>
+            <div><dt>19</dt><dd>courses to choose from</dd></div>
+            <div><dt>5</dt><dd>units in every course</dd></div>
+            <div><dt>5</dt><dd>kinds of study resource in every unit</dd></div>
+            <div><dt>1 Nov</dt><dd>when the first courses open, in 2026</dd></div>
+          </dl>
         </section>
 
         <section className="wrap">
@@ -75,19 +78,15 @@ export default function Home() {
           <div className="wrap">
             <h2 className="section light">See it in action</h2>
             <p className="lede2 light">Real screens from the app.</p>
-            <div className="strip" tabIndex={0} aria-label="App screenshots">
-              {[1, 2, 3, 4, 5, 6].map((n) => (
-                <img key={n} src={`/home/slide_${n}.webp`} alt={`Paartha app screenshot ${n} of 6`} width={600} height={1304} loading="lazy" />
-              ))}
-            </div>
+            <Strip images={[1, 2, 3, 4, 5, 6].map((n) => `/home/slide_${n}.webp`)} />
           </div>
         </section>
 
         <section className="wrap">
           <h2 className="section">What is inside every unit</h2>
           <div className="grid">
-            {inside.map((f) => (
-              <div className="card" key={f.t}><h3>{f.t}</h3><p>{f.d}</p></div>
+            {inside.map(({ t, d, I }) => (
+              <div className="card icard" key={t}><I className="bigicon" strokeWidth={1.4} aria-hidden /><h3>{t}</h3><p>{d}</p></div>
             ))}
           </div>
         </section>
@@ -118,7 +117,21 @@ export default function Home() {
             <h2>Download Paartha</h2>
             <p>Your partner for exam success.</p>
             <Stores light />
-            <img src="/home/group.webp" alt="The six Paartha students, waving" loading="lazy" />
+            <div className="scene">
+              <span className="bub b1">Exam tomorrow, 9 AM</span>
+              <span className="bub b2">Where do I even start?</span>
+              <span className="bub b3 ok">Important questions, by marks</span>
+              <span className="bub b4 ok">The cheatsheet is ready</span>
+              <div className="cast">
+                <img src="/home/char_3_foryou.webp" alt="" width={515} height={700} loading="lazy" />
+                <img src="/home/char_1_learn.webp" alt="" width={476} height={700} loading="lazy" />
+                <div className="mini"><img src="/home/slide_2.webp" alt="Paartha showing what to study next" width={600} height={1304} loading="lazy" /></div>
+                <img src="/home/char_5_breathe.webp" alt="" width={386} height={700} loading="lazy" />
+                <img src="/home/char_4_mudras.webp" alt="" width={539} height={700} loading="lazy" />
+                <img src="/home/char_6_profile.webp" alt="" width={372} height={700} loading="lazy" />
+              </div>
+              <div className="floor" />
+            </div>
           </div>
         </section>
       </main>

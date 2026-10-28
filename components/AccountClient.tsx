@@ -1,5 +1,6 @@
 "use client";
 
+import { ArrowRight, AtSign, BookOpen, Coins, MessageCircle } from "lucide-react";
 import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
 import { type Account, ApiError, createOrder, getAccount, verifyOrder } from "@/lib/api";
@@ -144,26 +145,31 @@ export default function AccountClient() {
 
       {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
 
-      <section className="acct-grid">
-        <div className="acct-card mudras">
-          <p className="label">Your mudras</p>
-          <p className="big">{fmt(account.mudras)}</p>
-          <p className="muted small">
-            {fmt(account.earned_mudras)} earned by studying{account.promotional_mudras > 0 ? ` · ${fmt(account.promotional_mudras)} promotional` : ""}
-          </p>
-        </div>
-        <div className="acct-card">
-          <p className="label">Your details</p>
-          <dl>
-            <dt>Email</dt><dd>{account.email}</dd>
-            {account.username && (<><dt>Username</dt><dd>@{account.username}</dd></>)}
-            <dt>Semester</dt><dd>{account.semester}</dd>
-            <dt>Courses</dt><dd>{account.courses}</dd>
-          </dl>
+      <section className="acct-card">
+        <h2>Your details</h2>
+        <div className="details">
+          <a className="drow" href="#get-mudras">
+            <span className="badge coin"><Coins size={20} /></span>
+            <div><b>{fmt(account.mudras)} <ArrowRight size={14} style={{ verticalAlign: "-2px" }} /></b><span className="l">Mudras earned{account.promotional_mudras > 0 ? ` · ${fmt(account.promotional_mudras)} promotional` : ""}</span></div>
+          </a>
+          <div className="drow">
+            <span className="badge arch"><BookOpen size={19} /></span>
+            <div><b>Semester {account.semester}</b><span className="l">Currently pursuing</span></div>
+          </div>
+          <div className="drow">
+            <span className="badge diamond"><MessageCircle size={17} /></span>
+            <div><b>{account.email}</b><span className="l">Email address</span></div>
+          </div>
+          {account.username && (
+            <div className="drow">
+              <span className="badge burst"><AtSign size={20} /></span>
+              <div><b>@{account.username}</b><span className="l">Username</span></div>
+            </div>
+          )}
         </div>
       </section>
 
-      <section className="acct-card">
+      <section className="acct-card" id="get-mudras">
         <h2>Get mudras</h2>
         <p className="muted">Mudras take money off courses in Paartha. Choose a pack and pay securely with Razorpay (UPI, cards or net banking).</p>
         <div className="packs">

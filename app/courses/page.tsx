@@ -6,8 +6,8 @@ export const metadata = { title: "Pre-register for your courses" };
 export default function Courses() {
   return (
     <>
-      <Header />
-      <main className="wrap" style={{ maxWidth: 980 }}>
+      <Header cta={false} />
+      <main className="wrap">
         <CoursesClient />
       </main>
       <Footer />

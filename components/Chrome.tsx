@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "paartha@theananta.in";
 
-export function Header() {
+export function Header({ cta = true }: { cta?: boolean }) {
   return (
     <header className="site wrap">
       <Link href="/" className="brand">PAARTHA</Link>
@@ -11,6 +11,7 @@ export function Header() {
         <Link href="/terms">Terms</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/account">Account</Link>
+        {cta && <Link href="/courses" className="navcta">Pre-register</Link>}
       </nav>
     </header>
   );

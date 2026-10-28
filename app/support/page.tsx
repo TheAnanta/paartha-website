@@ -7,7 +7,7 @@ export default function Support() {
   return (
     <>
       <Header />
-      <main className="wrap" style={{ maxWidth: 760 }}>
+      <main className="wrap">
         <h1 style={{ fontSize: 40, letterSpacing: -1 }}>How can we help?</h1>
         <p style={{ color: "var(--muted)" }}>
           The fastest way is the Support tab inside the app: open a ticket and the team replies there. You can also write to{" "}
