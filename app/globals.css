@@ -276,3 +276,7 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .scene { padding-top: 96px; }
 .bub.b1 { top: 6px; } .bub.b2 { top: 50px; } .bub.b3 { top: 6px; } .bub.b4 { top: 50px; }
 @media (max-width: 700px) { .scene { padding-top: 96px; } .bub.b1, .bub.b3 { top: 4px; } .bub.b2, .bub.b4 { top: 40px; } }
+
+.hero3 .art3 { display: grid; place-items: center; }
+.hero3 .art3 img { display: block; width: 100%; max-width: 520px; height: auto; object-fit: contain; }
+@media (max-width: 900px) { .hero3 .art3 img { max-width: 320px; } }

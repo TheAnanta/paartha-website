@@ -41,14 +41,7 @@ export default function Home() {
             <PreRegisterButton />
             <p className="fine">Courses open on 1 Nov 2026. Pre-register now at a lower price.</p>
           </div>
-          <div className="stage">
-            <img className="hc c4" src="/home/char_4_mudras.webp" alt="" width={539} height={700} />
-            <div className="ramp" />
-            <div className="phone"><img src="/home/slide_1.webp" alt="The Paartha app" width={600} height={1304} /></div>
-            <img className="hc c5" src="/home/char_5_breathe.webp" alt="A Paartha student pushing a phone up a ramp" width={386} height={700} />
-            <img className="hc c1" src="/home/char_1_learn.webp" alt="" width={476} height={700} />
-            <div className="ground" />
-          </div>
+          <div className="art3"><img src="/home/hero_study.webp" alt="Three Paartha students surrounded by books and loose papers the night before an exam" width={747} height={1000} /></div>
         </section>
 
         <section className="wrap glance" aria-label="Paartha at a glance">
