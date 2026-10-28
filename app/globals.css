@@ -276,32 +276,3 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .scene { padding-top: 96px; }
 .bub.b1 { top: 6px; } .bub.b2 { top: 50px; } .bub.b3 { top: 6px; } .bub.b4 { top: 50px; }
 @media (max-width: 700px) { .scene { padding-top: 96px; } .bub.b1, .bub.b3 { top: 4px; } .bub.b2, .bub.b4 { top: 40px; } }
-
-/* Home hero: the headline wraps around the ramp; characters peek from behind its words */
-.hero5 { padding-top: 40px; padding-bottom: 24px; }
-.hero5 .eyebrow { color: var(--couture); font-weight: 700; letter-spacing: .04em; text-transform: uppercase; font-size: 13px; margin: 0 0 12px; }
-.hero5 h1 { font-size: clamp(40px, 7.2vw, 92px); line-height: 1.34; letter-spacing: -0.045em; margin: 72px 0 24px; }
-.hero5 .w { position: relative; display: inline-block; z-index: 1; }
-.hero5 .t { position: relative; z-index: 1; }
-.hero5 .pk { -webkit-mask-image: linear-gradient(to bottom, #000 78%, transparent); mask-image: linear-gradient(to bottom, #000 78%, transparent); position: absolute; z-index: 0; height: auto; pointer-events: none; }
-.hero5 .pk.k { width: .85em; left: 28%; bottom: 86%; }
-.hero5 .pk.c { width: 1.35em; left: 92%; bottom: -8%; }
-.hero5 .pk.v { width: 1.1em; left: 118%; bottom: -6%; }
-.hero5 .pk.s { width: 1.2em; left: 150%; bottom: 84%; }
-.hero5 .pk.j { width: .95em; left: 44%; bottom: 86%; }
-.hero5 .lede { font-size: 19px; color: var(--muted); max-width: 440px; margin: 0 0 20px; }
-.wedge { float: right; width: 440px; height: 300px; margin: 40px 0 0 24px; position: relative; shape-outside: polygon(100% 0, 100% 100%, 0 100%); shape-margin: 12px; }
-.wedge .slope { position: absolute; inset: 0; background: var(--nautilus); clip-path: polygon(100% 0, 100% 100%, 0 100%); }
-.wedge .phone { position: absolute; left: 215px; bottom: 150px; width: 104px; border: 5px solid #111; border-radius: 20px; overflow: hidden; background: #111; transform: rotate(-34deg); transform-origin: bottom left; box-shadow: 0 12px 26px #0000003a; animation: climb 3.4s ease-in-out infinite; }
-.wedge .phone img { display: block; width: 100%; height: auto; }
-.wedge .push { position: absolute; height: 230px; width: auto; left: 90px; bottom: 96px; }
-@keyframes climb { 0%, 100% { transform: rotate(-34deg) translate(0, 0); } 50% { transform: rotate(-34deg) translate(12px, 0); } }
-@media (max-width: 760px) {
-  .hero5 { display: flex; flex-direction: column; }
-  .wedge { order: 9; float: none; margin: 90px auto 0; width: 100%; max-width: 440px; }
-  .hero5 h1 { margin-top: 44px; }
-  .hero5 .pk.c, .hero5 .pk.v, .hero5 .pk.s, .hero5 .pk.j { display: none; }
-}
-/* an earlier word's letters stay above a later word's character */
-.hero5 .w:nth-of-type(1) { z-index: 6; } .hero5 .w:nth-of-type(2) { z-index: 5; } .hero5 .w:nth-of-type(3) { z-index: 4; } .hero5 .w:nth-of-type(4) { z-index: 3; } .hero5 .w:nth-of-type(5) { z-index: 2; }
-.hero5 .pk.c, .hero5 .pk.v { width: 1.1em; left: 118%; bottom: -6%; }
