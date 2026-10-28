@@ -52,7 +52,7 @@ export default function Home() {
         </section>
 
         <section className="wrap glance" aria-label="Paartha at a glance">
-          <h2 className="section" style={{ marginTop: 40 }}>Your semester, laid out</h2>
+          <h2 className="section" style={{ marginTop: 64, marginBottom: 28 }}>Your semester, laid out</h2>
           <dl>
             <div><dt>19</dt><dd>courses to choose from</dd></div>
             <div><dt>5</dt><dd>units in every course</dd></div>

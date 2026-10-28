@@ -125,8 +125,8 @@ h2.section.light, .lede2.light { color: #fff; }
 .arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fffffff0; color: var(--nautilus); display: grid; place-items: center; cursor: pointer; box-shadow: 0 4px 14px #0000003a; } .arrow.l { left: -14px; } .arrow.r { right: -14px; }
 .strip { display: flex; gap: 16px; overflow-x: auto; scrollbar-width: none; padding: 24px 0 8px; scroll-snap-type: x mandatory; }
 .strip img { height: 520px; width: auto; border-radius: 20px; scroll-snap-align: start; flex: none; }
-.two, .faq2 { display: grid; grid-template-columns: 1fr 220px; gap: 24px; align-items: center; }
-.two .side, .faq2 .side { width: 220px; height: auto; align-self: center; -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
+.two, .faq2 { display: grid; grid-template-columns: 1fr 170px; gap: 24px; align-items: center; }
+.two .side, .faq2 .side { width: 170px; height: auto; align-self: center; -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent); mask-image: linear-gradient(to bottom, #000 82%, transparent); }
 .cta { background: var(--couture); color: #fff; margin-top: 72px; text-align: center; padding: 56px 0 0; overflow: hidden; }
 .cta h2 { font-size: clamp(30px, 5vw, 46px); margin: 0 0 4px; letter-spacing: -1px; }
 .cta p { margin: 0 0 16px; color: #ffffffcc; font-size: 18px; }
