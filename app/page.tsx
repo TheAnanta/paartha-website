@@ -33,22 +33,23 @@ export default function Home() {
     <>
       <Header cta={false} />
       <main>
-        <section className="wrap hero3">
-          <div className="h3copy">
-            <p className="eyebrow">Exam prep for university students</p>
-            <h1>Know what to study next, even the night before your exam.</h1>
-            <p className="lede">Notes, important questions, flashcards and quizzes for every unit, and a study plan built around your exam dates.</p>
-            <PreRegisterButton />
-            <p className="fine">Courses open on 1 Nov 2026. Pre-register now at a lower price.</p>
+        <section className="wrap hero5">
+          <div className="wedge" aria-hidden>
+            <div className="slope" />
+            <div className="phone"><img src="/home/slide_1.webp" alt="" width={600} height={1304} /></div>
+            <img className="push" src="/home/hero/manas.webp" alt="" width={545} height={700} />
           </div>
-          <div className="stage">
-            <img className="hc c4" src="/home/char_4_mudras.webp" alt="" width={539} height={700} />
-            <div className="ramp" />
-            <div className="phone"><img src="/home/slide_1.webp" alt="The Paartha app" width={600} height={1304} /></div>
-            <img className="hc c5" src="/home/char_5_breathe.webp" alt="A Paartha student pushing a phone up a ramp" width={386} height={700} />
-            <img className="hc c1" src="/home/char_1_learn.webp" alt="" width={476} height={700} />
-            <div className="ground" />
-          </div>
+          <p className="eyebrow">Exam prep for university students</p>
+          <h1>
+            <span className="w"><img className="pk k" src="/home/hero/kavya.webp" alt="" width={522} height={700} /><span className="t">Know</span></span>{" "}what to study{" "}
+            <span className="w"><img className="pk c" src="/home/hero/chandan.webp" alt="" width={518} height={700} /><span className="t">next,</span></span>{" "}even{" "}
+            <span className="w"><img className="pk v" src="/home/hero/varshita.webp" alt="" width={526} height={700} /><span className="t">the</span></span>{" "}night{" "}
+            <span className="w"><img className="pk s" src="/home/hero/sampath.webp" alt="" width={650} height={700} /><span className="t">before</span></span>{" "}your{" "}
+            <span className="w"><img className="pk j" src="/home/hero/jahnavi.webp" alt="" width={614} height={700} /><span className="t">exam.</span></span>
+          </h1>
+          <p className="lede">Notes, important questions, flashcards and quizzes for every unit, and a study plan built around your exam dates.</p>
+          <PreRegisterButton />
+          <p className="fine">Courses open on 1 Nov 2026. Pre-register now at a lower price.</p>
         </section>
 
         <section className="wrap glance" aria-label="Paartha at a glance">
