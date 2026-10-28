@@ -26,11 +26,22 @@ export function CourseImage({ c }: { c: Course }) {
   return <div className="cimg" style={{ background: c.image_color ?? "var(--nautilus)" }}><img src={c.image} alt="" loading="lazy" /></div>;
 }
 
-/** The small picture next to a course in the cart: its thumbnail, else its image, else the course code. */
+/** The small square picture next to a course in the cart: as tall as the text beside it. Its thumbnail, else its image, else the course code. */
 export function Thumb({ c }: { c: Course }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [size, setSize] = useState(64);
+  useLayoutEffect(() => {
+    const text = ref.current?.nextElementSibling;
+    if (!text) return;
+    const measure = () => setSize(Math.max(56, Math.round(text.getBoundingClientRect().height)));
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(text);
+    return () => ro.disconnect();
+  }, []);
   const src = c.thumbnail || c.image;
   return (
-    <div className="thumb" style={{ background: c.image_color ?? "var(--nautilus)" }}>
+    <div ref={ref} className="thumb" style={{ width: size, height: size, background: c.image_color ?? "var(--nautilus)" }}>
       {src ? <img src={src} alt="" loading="lazy" /> : <span>{c.code.slice(0, 4)}</span>}
     </div>
   );
