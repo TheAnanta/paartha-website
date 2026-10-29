@@ -13,7 +13,8 @@ export default function Stores({ light = false }: { light?: boolean }) {
         <span className={cls(true, true)} aria-disabled="true">macOS · Coming soon</span>
         <span className={cls(true, true)} aria-disabled="true">Windows · Coming soon</span>
       </div>
-      <p className="storenote">macOS and Windows launch on 1 November.<br />* The Google Play version of the Android app also goes live on 1 November.<br />** The public App Store link will be available after 1 November.</p>
+      <p className="storenote">macOS and Windows launch on 1 November.</p>
+      <p className="storefoot">* The Google Play version of the Android app also goes live on 1 November.<br />** The public App Store link will be available after 1 November.</p>
     </>
   );
 }
