@@ -305,5 +305,5 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .preceipt { max-width: 640px; margin: 0 auto; padding: 24px 26px 40px; } .pstrong { font-weight: 600; margin: 16px 0 12px; }
 .preceipt ul { list-style: none; padding: 0; margin: 0 0 16px; } .preceipt li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); } .preceipt li span { color: var(--muted); }
 .btn.soon { cursor: default; opacity: .7; }
-.storenote { margin: 14px 0 0; font-size: 13px; line-height: 1.5; opacity: .8; }
+.storenote { margin: 14px 0 0; font-size: 11px; line-height: 1.5; opacity: .8; }
 .cta .storenote { text-align: center; }
