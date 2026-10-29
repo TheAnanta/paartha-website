@@ -2,6 +2,9 @@ import type { NextConfig } from "next";
 
 const config: NextConfig = {
   // The app's legal screens load `<LEGAL_BASE_URL>/terms.html` and `/privacy.html`; serve those from the same live pages, chromeless.
+  async redirects() {
+    return [{ source: "/tools/note-sheets", destination: "/tools/note-sheets/index.html", permanent: false }];
+  },
   async rewrites() {
     return [
       { source: "/terms.html", destination: "/terms?embed=1" },

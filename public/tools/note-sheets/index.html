@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paartha note sheets: PDF maker</title>
+<style>
+  :root { --blue:#2e4269; --maroon:#9e2a2b; --cream:#f5f0e6; --ink:#20252b; }
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; color:var(--ink); background:var(--cream); }
+  main { max-width: 980px; margin: 0 auto; padding: 32px 20px 64px; display:grid; grid-template-columns: 340px 1fr; gap: 28px; }
+  h1 { grid-column: 1 / -1; margin:0; font-size: 28px; letter-spacing:-.5px; }
+  p.lead { grid-column: 1 / -1; margin:-18px 0 0; color:#555; }
+  form { background:#fff; border-radius:18px; padding:20px; display:grid; gap:14px; align-content:start; }
+  label { display:grid; gap:6px; font-weight:600; font-size:14px; }
+  label small { font-weight:400; color:#666; }
+  input[type=text], input[type=number], select { font: inherit; padding:10px 12px; border:1.5px solid #cfc9bd; border-radius:10px; width:100%; }
+  button { font: inherit; font-weight:700; padding:14px 18px; border:0; border-radius:999px; background:var(--blue); color:#fff; cursor:pointer; }
+  button[disabled] { opacity:.5; cursor:wait; }
+  #status { font-size:14px; min-height:20px; }
+  #status.bad { color:var(--maroon); }
+  .previews { display:grid; grid-template-columns: 1fr 1fr; gap:16px; align-content:start; }
+  figure { margin:0; background:#fff; border-radius:14px; padding:10px; }
+  figure canvas { width:100%; height:auto; display:block; border:1px solid #e3ddcf; }
+  figcaption { font-size:13px; color:#555; padding-top:6px; }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Paartha note sheets</h1>
+  <p class="lead">Makes one A4 PDF of the branded note pages for a subject: every unit, every page, numbered. Nothing leaves your computer.</p>
+  <form id="f">
+    <label>Subject name <input type="text" id="subject" value="Computer Organization &amp; Architecture" required></label>
+    <label>First unit <input type="number" id="first" min="1" max="99" value="1" required></label>
+    <label>Last unit <input type="number" id="last" min="1" max="99" value="5" required></label>
+    <label>Start page <small>Optional. The first page number printed in each unit; empty means 1. One number applies to every unit; or give a comma-separated list, one for each unit. To print extra sheets, for example, start at 21 with 10 pages for pages 21 to 30.</small>
+      <input type="text" id="start" placeholder="1   or   1,11,1,5,1" inputmode="numeric"></label>
+    <label>Pages per unit <input type="number" id="pages" min="1" max="200" value="4" required></label>
+    <label>Different pages for each unit? <small>Optional: comma-separated, one number for each unit from the first to the last, for example 6,4,8,5,5. Overrides "Pages per unit".</small>
+      <input type="text" id="perUnit" placeholder="6,4,8,5,5"></label>
+    <label>Alternate the watermark by
+      <select id="parity">
+        <option value="unit">page number inside the unit (as in the designs)</option>
+        <option value="doc">page number in the whole PDF (for double-sided printing)</option>
+      </select></label>
+    <label style="display:flex;gap:10px;align-items:flex-start;font-weight:500"><input type="checkbox" id="pad" checked style="margin-top:3px">
+      <span>Add a blank white page after a unit with an odd number of pages <small>so each unit prints as whole double-sided sheets</small></span></label>
+    <button id="go" type="submit">Make PDF</button>
+    <div id="status" role="status"></div>
+  </form>
+  <div class="previews">
+    <figure><canvas id="pv-odd"></canvas><figcaption>Odd pages: watermark from the left half of the picture.</figcaption></figure>
+    <figure><canvas id="pv-even"></canvas><figcaption>Even pages: watermark from the right half.</figcaption></figure>
+  </div>
+</main>
+<script src="lib/pdf-lib.min.js"></script>
+<script src="lib/fontkit.umd.min.js"></script>
+<script src="assets.js"></script>
+<script src="make_pdf.js"></script>
+<script>
+  const $ = (id) => document.getElementById(id);
+  const status = (t, bad) => { $("status").textContent = t; $("status").className = bad ? "bad" : ""; };
+  function show(canvas, frame) { canvas.width = frame.width / 3; canvas.height = frame.height / 3; canvas.getContext("2d").drawImage(frame, 0, 0, canvas.width, canvas.height); }
+  (async () => {
+    try { const f = await NoteSheets.frames(); show($("pv-odd"), f.odd); show($("pv-even"), f.even); } catch (e) { status("Could not load the artwork: " + e.message, true); }
+  })();
+  $("f").addEventListener("submit", async (e) => {
+    e.preventDefault(); $("go").disabled = true; status("Making the PDF…");
+    try {
+      const subject = $("subject").value.trim(), first = +$("first").value, last = +$("last").value, pages = +$("pages").value;
+      if (!(first >= 1) || !(last >= first)) throw new Error("The last unit must be the same as, or after, the first unit.");
+      const units = last - first + 1, per = $("perUnit").value.trim();
+      let counts = Array(units).fill(pages);
+      const startRaw = $("start").value.trim();
+      let starts = Array(units).fill(1);
+      if (startRaw) {
+        const list = startRaw.split(/[ ,]+/).filter(Boolean).map(Number);
+        if (list.some((n) => !Number.isInteger(n) || n < 1)) throw new Error("Start pages must be whole numbers, 1 or more.");
+        if (list.length === 1) starts = Array(units).fill(list[0]);
+        else if (list.length === units) starts = list;
+        else throw new Error(`Give one start page for all units, or exactly ${units} start pages, one for each of units ${first} to ${last}.`);
+      }
+      if (per) { counts = per.split(/[ ,]+/).filter(Boolean).map(Number); if (counts.length !== units || counts.some((n) => !(n >= 1))) throw new Error(`Give exactly ${units} page counts (whole numbers, 1 or more), one for each of units ${first} to ${last}.`); }
+      const { bytes, total, blanks, warnings } = await NoteSheets.make({ subject, firstUnit: first, startPages: starts, blankPad: $("pad").checked, pagesPerUnit: counts, parity: $("parity").value });
+      const url = URL.createObjectURL(new Blob([bytes], { type: "application/pdf" }));
+      const a = Object.assign(document.createElement("a"), { href: url, download: `Paartha notes - ${subject.replace(/[\\/:*?"<>|]+/g, " ")} - units ${first}-${last}${starts.some((n) => n > 1) ? " (reprint)" : ""}.pdf` });
+      document.body.append(a); a.click(); a.remove();
+      status(`Done: ${total} pages${blanks ? ` (${blanks} of them blank)` : ""}, ${(bytes.length / 1048576).toFixed(1)} MB.` + (warnings.length ? " " + warnings.join(" ") : ""), warnings.length > 0);
+    } catch (err) { status(err.message || String(err), true); } finally { $("go").disabled = false; }
+  });
+</script>
+</body>
+</html>
