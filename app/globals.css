@@ -280,3 +280,27 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .hero3 .art3 { display: grid; place-items: center; }
 .hero3 .art3 img { display: block; width: 100%; max-width: 520px; height: auto; object-fit: contain; }
 @media (max-width: 900px) { .hero3 .art3 img { max-width: 320px; } }
+
+/* Payment screens, as in the app */
+.pscreen { min-height: 100vh; background: #fdfdfd; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 0 20px 36px; }
+.pbar { width: 100%; max-width: 640px; display: flex; align-items: center; justify-content: space-between; padding: 18px 0; } .pbar .brand { font-weight: 800; letter-spacing: -0.5px; font-size: 22px; }
+.psupport { display: grid; justify-items: center; font-size: 12px; color: #20252b99; text-decoration: none; }
+.pmedia { flex: 1; display: grid; place-items: center; width: 100%; max-width: 520px; min-height: 240px; } .pmedia video { max-width: 100%; max-height: 52vh; height: auto; }
+.pcopy h1 { font-size: 30px; letter-spacing: -.7px; margin: 8px 0; } .pcopy h1.small { font-size: 22px; letter-spacing: -.5px; }
+.pid { color: #20252b99; font-size: 14px; margin: 0 0 8px; } .pid.dark { color: #20252b; }
+.pmsg { max-width: 420px; color: #20252b99; margin: 12px auto 18px; } .pcode { font-size: 12px; color: #20252b80; margin: 2px 0; }
+.pghost { background: none; border: 1.5px solid var(--black); border-radius: 999px; padding: 8px 26px; font: inherit; cursor: pointer; margin-top: 14px; }
+.pdark { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--black); color: #fff; border: 0; border-radius: 999px; padding: 12px 24px; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; margin-top: 22px; } .pdark.wide { display: flex; width: 100%; height: 59px; }
+.pnote { max-width: 420px; color: #20252b99; font-size: 14px; margin: 24px 0 0; } .pnote b { font-weight: 500; }
+.pscreen.enter .pbar, .pscreen.enter .pcopy, .pscreen.enter .pmedia { opacity: 0; transition: transform .65s cubic-bezier(.2,.8,.2,1), opacity .55s ease; }
+.pscreen.enter .pbar { transform: translateY(-90%); } .pscreen.enter .pcopy { transform: translateY(90%); transition-delay: .15s; } .pscreen.enter .pmedia { transition-delay: .25s; }
+.pscreen.enter.in .pbar, .pscreen.enter.in .pcopy, .pscreen.enter.in .pmedia { opacity: 1; transform: none; }
+.psuccess { min-height: 100vh; background: #fdfdfd; }
+.phero { position: relative; height: 62vh; overflow: hidden; background: #fff; transition: height .75s cubic-bezier(.65,0,.35,1); cursor: pointer; } .phero.full { height: 100vh; }
+.phero video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
+.pfade { position: absolute; left: 0; right: 0; bottom: 0; height: 170px; background: linear-gradient(to bottom, transparent, #341158); opacity: 0; transition: opacity .5s; } .pfade.on { opacity: 1; }
+.ptitle { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; text-align: center; color: #fff; opacity: 0; transition: opacity .5s; padding: 0 26px 24px; } .ptitle.on { opacity: 1; }
+.ptitle .pspacer { flex: 1; } .ptitle h1 { font-size: 28px; letter-spacing: -.7px; margin: 0 0 8px; } .ptitle p { margin: 0 0 14px; font-size: 16px; max-width: 460px; }
+.pbar.light { color: #fff; } .phint { opacity: 0; transition: opacity .3s; height: 24px; } .phint.on { opacity: 1; }
+.preceipt { max-width: 640px; margin: 0 auto; padding: 24px 26px 40px; } .pstrong { font-weight: 600; margin: 16px 0 12px; }
+.preceipt ul { list-style: none; padding: 0; margin: 0 0 16px; } .preceipt li { display: flex; justify-content: space-between; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--line); } .preceipt li span { color: var(--muted); }

@@ -7,6 +7,7 @@ import StudentGate from "@/components/StudentGate";
 import { availability, day, inr, Members, Thumb } from "@/components/shop";
 import { auth } from "@/lib/firebase";
 import { openCheckout } from "@/lib/razorpay";
+import { PaymentFailure, PaymentLoading, PaymentSuccess } from "@/components/PaymentScreens";
 import { addToCart, type Cart, type Course, getCart, getCensus, listCourses, removeFromCart, startPayment, verifyPayment } from "@/lib/student";
 
 export default function CartClient() {
@@ -19,7 +20,10 @@ function CartPage({ user }: { user: User }) {
   const [census, setCensus] = useState<Record<string, number>>({});
   const [busy, setBusy] = useState<string | null>(null);
   const [error, setError] = useState("");
-  const [paid, setPaid] = useState<Course[] | null>(null);
+  // The checkout flow, as in the app: a processing screen, then the success celebration or the failure screen.
+  type Flow = { kind: "processing"; paymentId: string } | { kind: "failed"; code: string; paymentId: string } | { kind: "success"; paymentId: string; courses: Course[] };
+  const [flow, setFlow] = useState<Flow | null>(null);
+  const paymentRef = useRef({ id: "", razorpayPaymentId: "", signature: "", courses: [] as Course[] });
   // The mobile "Pay now" bar scrolls to the summary and hides while the summary is on screen.
   const summaryRef = useRef<HTMLElement>(null);
   const [summaryShown, setSummaryShown] = useState(false);
@@ -47,43 +51,55 @@ function CartPage({ user }: { user: User }) {
   }
   const addAll = (ids: string[]) => act(ids.join(","), async (t) => { let c!: Cart; for (const id of ids) c = await addToCart(t, id); return c; });
 
-  async function pay() {
-    if (!cart || cart.items.length === 0) return;
-    setError("");
-    setBusy("pay");
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  /** Asks the server about the payment (again, while it is still pending) until it is confirmed or fails. */
+  async function verify() {
+    const pr = paymentRef.current;
+    setFlow({ kind: "processing", paymentId: pr.id });
     try {
       const token = await user.getIdToken();
-      const bought = cart.items;
-      const p = await startPayment(token);
-      if (p.amount > 0 && p.razorpay_order_id && p.razorpay_key_id) {
-        const r = await openCheckout({ keyId: p.razorpay_key_id, orderId: p.razorpay_order_id, amountRupees: p.amount, description: `Pre-registration: ${bought.length} course${bought.length > 1 ? "s" : ""}`, email: user.email ?? undefined, name: user.displayName ?? undefined });
-        if (r.status === "closed") return;
-        if (r.status === "failed") { setError(r.message); return; }
-        await verifyPayment(token, p.payment_id, { razorpay_payment_id: r.paymentId, razorpay_signature: r.signature });
-      } else if (p.amount > 0) {
-        await verifyPayment(token, p.payment_id, {}); // a test server that takes no payment
-      } // else mudras covered everything and the server has already completed it
-      setPaid(bought);
-      await load().catch(() => undefined);
+      for (let polled = 0; ; polled++) {
+        const rec = await verifyPayment(token, pr.id, pr.razorpayPaymentId ? { razorpay_payment_id: pr.razorpayPaymentId, razorpay_signature: pr.signature } : {});
+        if (rec.status === "successful") { setFlow({ kind: "success", paymentId: pr.id, courses: pr.courses }); await load().catch(() => undefined); return; }
+        if (rec.status !== "pending") { setFlow({ kind: "failed", code: `payment_${rec.status}`, paymentId: pr.id }); return; }
+        if (polled >= 5) { setFlow({ kind: "failed", code: "payment_pending", paymentId: pr.id }); return; }
+        await wait(3000);
+      }
     } catch (e) {
-      setError(e instanceof Error ? e.message : "The payment didn't go through.");
-    } finally {
-      setBusy(null);
+      setFlow({ kind: "failed", code: e instanceof Error ? e.message : "payment_failed", paymentId: pr.id });
     }
   }
 
-  if (paid) {
-    const on = day(paid.find((c) => c.available_from)?.available_from ?? null);
-    return (
-      <section className="acct-card" style={{ maxWidth: 620, margin: "48px auto" }}>
-        <p className="eyebrow" style={{ color: "var(--couture)", fontWeight: 700, letterSpacing: ".04em", textTransform: "uppercase", fontSize: 13, margin: "0 0 8px" }}>You&rsquo;re pre-registered</p>
-        <h2 style={{ fontSize: 32 }}>Payment received. Thank you!</h2>
-        <ul className="history">{paid.map((c) => (<li key={c.id}><b>{c.title}</b><em>{c.code}</em><span /></li>))}</ul>
-        <p className="muted">{on ? `Your courses open on ${on}.` : "Your courses open soon."} We&rsquo;ll notify you in the Paartha app when they do. Sign in to the app with this same Google account ({user.email}).</p>
-        <Link className="acct-btn dark" style={{ textDecoration: "none", display: "grid", placeItems: "center" }} href="/courses">Back to courses</Link>
-      </section>
-    );
+  async function pay() {
+    if (!cart || cart.items.length === 0) return;
+    setError("");
+    paymentRef.current = { id: "", razorpayPaymentId: "", signature: "", courses: cart.items };
+    setFlow({ kind: "processing", paymentId: "" });
+    try {
+      const token = await user.getIdToken();
+      const p = await startPayment(token);
+      paymentRef.current.id = p.payment_id;
+      if (p.amount > 0 && p.razorpay_order_id && p.razorpay_key_id) {
+        const r = await openCheckout({ keyId: p.razorpay_key_id, orderId: p.razorpay_order_id, amountRupees: p.amount, description: `Pre-registration: ${cart.items.length} course${cart.items.length > 1 ? "s" : ""}`, email: user.email ?? undefined, name: user.displayName ?? undefined });
+        if (r.status === "closed") { setFlow(null); return; } // closed the payment window: back to the cart
+        if (r.status === "failed") { setFlow({ kind: "failed", code: "payment_failed", paymentId: p.payment_id }); return; }
+        paymentRef.current.razorpayPaymentId = r.paymentId;
+        paymentRef.current.signature = r.signature;
+      }
+      await verify(); // mudras covered everything: the server has already completed it, and a test server just needs the call
+    } catch (e) {
+      setFlow(null);
+      setError(e instanceof Error ? e.message : "We couldn't start the payment.");
+    }
   }
+
+  // "retry payment": if the gateway took the money and only our check failed, the same payment is checked again, so no one is charged twice.
+  const retry = () => (paymentRef.current.razorpayPaymentId || !paymentRef.current.id ? (paymentRef.current.id ? verify() : pay()) : pay());
+
+  if (flow?.kind === "processing") return <PaymentLoading paymentId={flow.paymentId} onVerify={flow.paymentId ? verify : undefined} />;
+  if (flow?.kind === "failed") return <PaymentFailure code={flow.code} paymentId={flow.paymentId} onRetry={retry} />;
+  if (flow?.kind === "success") return <PaymentSuccess paymentId={flow.paymentId} courses={flow.courses} />;
 
   const inCart = new Set(cart?.items.map((i) => i.id));
   const more = courses.filter((c) => !c.purchased && !inCart.has(c.id));

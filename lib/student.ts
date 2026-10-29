@@ -27,6 +27,8 @@ export interface Cart {
   total: number;
 }
 export interface PaymentStart { payment_id: string; amount: number; razorpay_order_id?: string; razorpay_key_id?: string }
+export interface PaymentRecord { id: string; status: "successful" | "pending" | "failed"; courses: Course[]; subtotal: number; tax: number }
+export interface Checkout { payment_id: string; status: "successful" | "pending" | "failed"; amount: number; razorpay_order_id: string | null; razorpay_key_id: string | null }
 export type Session = { outcome: "signed_in" | "needs_sign_up" | "device_exists" | "device_exhausted"; roll_number?: string };
 
 /** The same text the app's pre-registration sheet shows. Product copy, as in the backend's PLAN. */
@@ -59,7 +61,9 @@ export const getCart = (token: string) => call<Cart>(token, "GET", "/cart");
 export const addToCart = (token: string, id: string) => call<Cart>(token, "PUT", `/cart/items/${encodeURIComponent(id)}`);
 export const startPayment = (token: string) => call<PaymentStart>(token, "POST", "/payments");
 export const verifyPayment = (token: string, id: string, proof: { razorpay_payment_id: string; razorpay_signature: string } | {}) =>
-  call<{ id: string; courses: Course[]; subtotal: number; tax: number }>(token, "POST", `/payments/${id}/verify`, proof);
+  call<PaymentRecord>(token, "POST", `/payments/${id}/verify`, proof);
 export const removeFromCart = (token: string, id: string) => call<Cart>(token, "DELETE", `/cart/items/${encodeURIComponent(id)}`);
 /** course id -> how many students are shown as taking it. */
 export const getCensus = (token: string) => call<Record<string, number>>(token, "GET", "/courses/census");
+/** The Razorpay order for an existing payment (the desktop app opens /pay/<payment id>). */
+export const getCheckout = (token: string, id: string) => call<Checkout>(token, "GET", `/payments/${encodeURIComponent(id)}/checkout`);
