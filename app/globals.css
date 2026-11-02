@@ -307,6 +307,6 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .btn.soon { cursor: default; opacity: .7; }
 .storenote { margin: 22px 0 0; font-size: 11px; line-height: 1.5; opacity: .8; }
 .cta .storenote { text-align: center; }
-.storefoot { margin: 6px 0 0; font-size: 4px; line-height: 1.5; opacity: .8; }
-.cta .storefoot { text-align: center; }
-.stores + .storefoot { margin-top: 22px; }
+.storefoot { margin: 6px 0 0; font-size: 12px; line-height: 1.5; opacity: .8; }
+.cta .storefoot { text-align: center; font-size: 12px; margin: 6px 0 0; color: #ffffffcc; }
+.stores + .storefoot, .cta .stores + .storefoot { margin-top: 22px; }

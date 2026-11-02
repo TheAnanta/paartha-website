@@ -30,8 +30,8 @@ export default function Stores({ light = false }: { light?: boolean }) {
           <a key={o} className={cls(i === 0)} href={links[o].href} download={links[o].download || undefined}>{links[o].label}</a>
         ))}
       </div>
-      <p className="storefoot">* The Google Play version of the Android app also goes live on 1 November.</p>
-      <p className="storefoot">** The public App Store link will be available after 1 November.</p>
+      <p className="storefoot">* The Google Play version of the Android app also goes live on 4 November.</p>
+      <p className="storefoot">** The public App Store link will be available after 4 November.</p>
     </>
   );
 }
