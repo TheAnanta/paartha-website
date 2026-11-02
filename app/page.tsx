@@ -39,7 +39,7 @@ export default function Home() {
             <h1>Know what to study next, even the night before your exam.</h1>
             <p className="lede">Notes, important questions, flashcards and quizzes for every unit, and a study plan built around your exam dates.</p>
             <PreRegisterButton />
-            <p className="fine">Courses open on 1 Nov 2026. Pre-register now at a lower price.</p>
+            <p className="fine">Courses open on 4 Nov 2026. Pre-register now at a lower price.</p>
           </div>
           <div className="art3"><img src="/home/hero_study.webp" alt="Three Paartha students surrounded by books and loose papers the night before an exam" width={747} height={1000} /></div>
         </section>
@@ -50,7 +50,7 @@ export default function Home() {
             <div><dt>19</dt><dd>courses to choose from</dd></div>
             <div><dt>5</dt><dd>units in every course</dd></div>
             <div><dt>5</dt><dd>kinds of study resource in every unit</dd></div>
-            <div><dt>1 Nov</dt><dd>when the first courses open, in 2026</dd></div>
+            <div><dt>4 Nov</dt><dd>when the first courses open, in 2026</dd></div>
           </dl>
         </section>
 
