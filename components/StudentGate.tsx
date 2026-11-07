@@ -1,6 +1,6 @@
 "use client";
 
-import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
+import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import AuthShell from "@/components/AuthShell";
 import { AppleLogo, GoogleLogo } from "@/components/AuthLogos";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
@@ -37,11 +37,17 @@ export default function StudentGate({ children }: { children: (user: User) => Re
     [begin],
   );
 
-  async function signIn() {
+  async function signIn(provider: "google" | "apple" = "google") {
     setMessage(null);
     setBusy(true);
     try {
-      await signInWithPopup(auth, new GoogleAuthProvider());
+      if (provider === "google") await signInWithPopup(auth, new GoogleAuthProvider());
+      else {
+        const apple = new OAuthProvider("apple.com");
+        apple.addScope("email");
+        apple.addScope("name");
+        await signInWithPopup(auth, apple);
+      }
     } catch (e) {
       const code = (e as { code?: string }).code ?? "";
       if (code !== "auth/popup-closed-by-user" && code !== "auth/cancelled-popup-request") {
@@ -76,7 +82,8 @@ export default function StudentGate({ children }: { children: (user: User) => Re
         <h2>Get started with Paartha</h2>
         <p className="muted">Sign in with the Google account you use (or will use) for Paartha. We&rsquo;ll set up your account and show you your courses.</p>
         {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
-        <button className="acct-btn google" disabled={busy} onClick={signIn}><GoogleLogo />Continue with Google</button>
+        <button className="acct-btn google" disabled={busy} onClick={() => signIn("google")}><GoogleLogo />Continue with Google</button>
+        <button className="acct-btn apple" disabled={busy} onClick={() => signIn("apple")}><AppleLogo />Continue with Apple</button>
       </section>
       </AuthShell>
     );

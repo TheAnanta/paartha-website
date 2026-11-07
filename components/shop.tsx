@@ -22,8 +22,10 @@ export function Members({ n }: { n?: number }) {
 
 /** The course picture on a card (the app's course image, on its own colour). */
 export function CourseImage({ c }: { c: Course }) {
-  if (!c.image) return null;
-  return <div className="cimg" style={{ background: c.image_color ?? "var(--nautilus)" }}><img src={c.image} alt="" loading="lazy" /></div>;
+  const bg = c.image_color ?? "var(--nautilus)";
+  // No picture set for this course yet: a coloured tile with its code, so the card never looks bare.
+  if (!c.image) return <div className="cimg cimg-empty" style={{ background: bg }}><span>{c.code}</span></div>;
+  return <div className="cimg" style={{ background: bg }}><img src={c.image} alt="" loading="lazy" /></div>;
 }
 
 /** The small square picture next to a course in the cart: its thumbnail, else its image, else the course code. */

@@ -371,3 +371,4 @@ body .authform .acct-card { border: 0; box-shadow: none; background: transparent
 .authform .acct-btn.google { background: #fff; color: #14204a; }
 .authform .acct-btn.apple { background: #000; color: #fff; border-color: #000; box-shadow: 0 5px 0 #14204a; }
 .authshell { margin-bottom: 80px; }
+.cimg-empty { display: grid; place-items: center; color: #ffffffd9; font-weight: 800; font-size: 28px; letter-spacing: -0.02em; background-image: radial-gradient(#ffffff1f 1.4px, transparent 1.6px); background-size: 22px 22px; }
