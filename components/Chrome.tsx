@@ -5,7 +5,7 @@ export const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "paartha@t
 export function Header({ cta = true }: { cta?: boolean }) {
   return (
     <header className="site wrap">
-      <Link href="/" className="brand">PAARTHA</Link>
+      <Link href="/" className="brand">PAARTHA<span>.</span></Link>
       <nav>
         <Link href="/support">Support</Link>
         <Link href="/terms">Terms</Link>
@@ -19,15 +19,17 @@ export function Header({ cta = true }: { cta?: boolean }) {
 
 export function Footer() {
   return (
-    <footer className="site wrap">
-      <div>© {new Date().getFullYear()} Paartha</div>
-      <div>
+    <footer className="sitefoot">
+     <div className="wrap foot">
+      <div className="fbrand"><b>PAARTHA<span>.</span></b><small>© {new Date().getFullYear()} Paartha, by the ananta</small></div>
+      <div className="flinks">
         <Link href="/support">Support</Link>
         <Link href="/terms">Terms &amp; Conditions</Link>
         <Link href="/privacy">Privacy Policy</Link>
         <Link href="/delete-account">Delete account</Link>
         <a href={`mailto:${SUPPORT_EMAIL}`}>{SUPPORT_EMAIL}</a>
       </div>
+     </div>
     </footer>
   );
 }

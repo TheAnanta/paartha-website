@@ -3,7 +3,7 @@
 html { color-scheme: light; }
 body { margin:0; font-family: "Funnel Sans", -apple-system, "Helvetica Neue", Arial, sans-serif; color: var(--ink); background: var(--white); line-height: 1.6; }
 a { color: inherit; }
-.wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
 header.site { display:flex; align-items:center; justify-content:space-between; padding: 20px 24px; }
 header.site .brand { font-weight: 800; letter-spacing: -0.5px; font-size: 22px; text-decoration:none; }
 header.site nav a { margin-left: 20px; text-decoration:none; color: var(--muted); font-weight: 500; }
@@ -310,3 +310,18 @@ header.site nav a.navcta { background: var(--nautilus); color: #fff; padding: 8p
 .storefoot { margin: 6px 0 0; font-size: 12px; line-height: 1.5; opacity: .8; }
 .cta .storefoot { text-align: center; font-size: 12px; margin: 6px 0 0; color: #ffffffcc; }
 .stores + .storefoot, .cta .stores + .storefoot { margin-top: 22px; }
+
+/* Bold chrome (header and footer), shared by every page */
+header.site { padding: 18px 24px; }
+header.site .brand { font-weight: 800; letter-spacing: -0.04em; font-size: 26px; color: #1b2f66; }
+header.site .brand span, .fbrand span { color: #e0383e; }
+header.site nav a { font-weight: 600; color: #14204a; }
+header.site nav a:hover { color: #e0383e; }
+header.site nav a.navcta { background: #ffc933; color: #14204a; box-shadow: 0 3px 0 #14204a; }
+.sitefoot { background: #14204a; color: #ffffffcc; margin-top: 0; }
+.sitefoot .foot { display: flex; flex-wrap: wrap; gap: 28px; justify-content: space-between; align-items: flex-start; padding: 48px 24px 56px; font-size: 15px; }
+.fbrand b { font-size: 34px; font-weight: 800; letter-spacing: -0.04em; }
+.fbrand { font-weight: 800; font-size: 34px; letter-spacing: -0.04em; color: #fff; display: grid; }
+.fbrand small { font-size: 13px; font-weight: 400; letter-spacing: 0; color: #ffffff99; margin-top: 6px; }
+.flinks { display: flex; flex-wrap: wrap; gap: 10px 22px; max-width: 560px; }
+.sitefoot a { text-decoration: none; color: #fff; font-weight: 500; } .sitefoot a:hover { color: #ffc933; text-decoration: underline; }

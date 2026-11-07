@@ -6,7 +6,7 @@ import { useState } from "react";
 import { auth } from "@/lib/firebase";
 
 /** Asks the visitor to sign in with Google (as the app does), then lands them on their courses to pre-order. */
-export default function PreRegisterButton({ light = false }: { light?: boolean }) {
+export default function PreRegisterButton({ light = false, className, label = "Pre-register now" }: { light?: boolean; className?: string; label?: string }) {
   const router = useRouter();
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
@@ -29,8 +29,8 @@ export default function PreRegisterButton({ light = false }: { light?: boolean }
 
   return (
     <div>
-      <button className={light ? "btn light" : "btn"} style={{ border: 0, font: "inherit", fontWeight: 600, cursor: "pointer" }} disabled={busy} onClick={go}>
-        {busy ? "Signing you in…" : "Pre-register now"}
+      <button className={className ?? (light ? "btn light" : "btn")} style={{ border: 0, font: "inherit", fontWeight: 600, cursor: "pointer" }} disabled={busy} onClick={go}>
+        {busy ? "Signing you in…" : label}
       </button>
       {error && <p className="acct-msg bad">{error}</p>}
     </div>

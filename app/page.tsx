@@ -3,13 +3,24 @@ import { Footer, Header } from "@/components/Chrome";
 import PreRegisterButton from "@/components/PreRegisterButton";
 import Stores from "@/components/Stores";
 import Strip from "@/components/Strip";
-import { CalendarCheck, ClipboardCheck, FileText, ListChecks, Network, Zap } from "lucide-react";
+import Testimonials from "@/components/Testimonials";
+import { ArrowRight, BookOpenCheck, CalendarCheck, Check, ClipboardCheck, FileText, Flame, ListChecks, Moon, Network, Sparkles, Target, Trophy, Zap } from "lucide-react";
 import { FAQ } from "@/content/faq";
+import "./home.css";
 
 export const metadata = {
   title: "Paartha: know what to study next",
   description: "Notes, important questions, flashcards, quizzes and a study plan for every unit of your university course.",
 };
+
+const needs = [
+  { t: "Cram the night before", I: Moon, c: "navy" },
+  { t: "Ace the sessional", I: Target, c: "red" },
+  { t: "Clear a backlog", I: Flame, c: "yellow" },
+  { t: "Plan my semester", I: CalendarCheck, c: "navy" },
+  { t: "Get the cheatsheet", I: Zap, c: "red" },
+  { t: "Earn mudras", I: Trophy, c: "yellow" },
+];
 
 const why = [
   { img: "char_3_foryou", t: "A plan built around your exam dates", d: "Add your exams and Paartha lays out the week: the most useful things first, and the last 24 hours kept for important questions and the cheatsheet." },
@@ -27,39 +38,82 @@ const inside = [
   { t: "Study plan", I: CalendarCheck, d: "A week plan that puts the best resources first." },
 ];
 
+const TICKER = ["know what to study next", "important questions by marks", "the night before, sorted", "notes · cheatsheets · quizzes", "pre-register from 4 Nov"];
+
 export default function Home() {
   const faq = FAQ.flatMap((g) => g.items).filter((i) => !/stuck|ticket|refund|language/i.test(i.q)).slice(0, 8);
   return (
     <>
-      <Header cta={false} />
-      <main>
-        <section className="wrap hero3">
-          <div className="h3copy">
-            <p className="eyebrow">Exam prep for university students</p>
-            <h1>Know what to study next, even the night before your exam.</h1>
-            <p className="lede">Notes, important questions, flashcards and quizzes for every unit, and a study plan built around your exam dates.</p>
-            <PreRegisterButton />
-            <p className="fine">Courses open on 4 Nov 2026. Pre-register now at a lower price.</p>
+      <div className="topbar"><Link href="/courses">Courses open 4 Nov · Pre-register now at a lower price <ArrowRight size={16} aria-hidden /></Link></div>
+      <Header />
+      <main className="hv">
+        <section className="herox">
+          <div className="wrap herogrid">
+            <div className="hcopy">
+              <p className="kicker"><Sparkles size={16} aria-hidden /> Exam prep for engineering students</p>
+              <h1>Know what to study next. <em>Even the night before.</em></h1>
+              <ul className="ticks">
+                <li><Check size={20} strokeWidth={3} aria-hidden /> Notes, important questions, cheatsheets and quizzes for every unit</li>
+                <li><Check size={20} strokeWidth={3} aria-hidden /> A study plan built around your exam dates</li>
+                <li><Check size={20} strokeWidth={3} aria-hidden /> Written for your university syllabus, by the people who teach it</li>
+              </ul>
+              <div className="ctas">
+                <PreRegisterButton className="big yellow" label="Pre-register now" />
+                <a className="big ghostw" href="#download">Get the app</a>
+              </div>
+              <p className="fine">Courses open on 4 Nov 2026 · pre-register at a lower price</p>
+            </div>
+            <div className="hart">
+              <div className="blob" aria-hidden />
+              <img src="/home/hero_study.webp" alt="Three Paartha students surrounded by books and loose papers the night before an exam" width={747} height={1000} />
+              <span className="hchip c1"><BookOpenCheck size={18} aria-hidden /> Exam tomorrow, 9 AM</span>
+              <span className="hchip c2 ok"><Check size={18} strokeWidth={3} aria-hidden /> Important questions, ready</span>
+            </div>
           </div>
-          <div className="art3"><img src="/home/hero_study.webp" alt="Three Paartha students surrounded by books and loose papers the night before an exam" width={747} height={1000} /></div>
+          <div className="wrap duo">
+            <div className="duocard dyellow">
+              <h2>Pre-register for your courses</h2>
+              <p>Lock in the lower price before courses open on 4 Nov.</p>
+              <PreRegisterButton className="big navy" label="Pre-register now" />
+            </div>
+            <div className="duocard dred">
+              <h2>Get the app on any device</h2>
+              <p>Android, iOS, macOS and Windows.</p>
+              <a className="big cream" href="#download">See downloads <ArrowRight size={18} aria-hidden /></a>
+            </div>
+          </div>
         </section>
 
-        <section className="wrap glance" aria-label="Paartha at a glance">
-          <h2 className="section" style={{ marginTop: 64, marginBottom: 28 }}>Your semester, laid out</h2>
-          <dl>
-            <div><dt>19</dt><dd>courses to choose from</dd></div>
-            <div><dt>5</dt><dd>units in every course</dd></div>
-            <div><dt>5</dt><dd>kinds of study resource in every unit</dd></div>
-            <div><dt>4 Nov</dt><dd>when the first courses open, in 2026</dd></div>
-          </dl>
+        <div className="ticker" aria-hidden>
+          <div className="track">{[...TICKER, ...TICKER, ...TICKER, ...TICKER].map((t, i) => (<span key={i}>{t}<i>✦</i></span>))}</div>
+        </div>
+
+        <section className="wrap sec">
+          <h2 className="h2">What do you need right now?</h2>
+          <div className="needs">
+            {needs.map(({ t, I, c }) => (
+              <Link href="/courses" className={`need n-${c}`} key={t}><span>{t}</span><I size={34} strokeWidth={2} aria-hidden /><ArrowRight className="go" size={18} aria-hidden /></Link>
+            ))}
+          </div>
         </section>
 
-        <section className="wrap">
-          <h2 className="section">Why students will love it</h2>
-          <p className="lede2">Built to cut the clutter and show only what matters for your exam.</p>
+        <section className="statband">
+          <div className="wrap">
+            <dl>
+              <div><dt>19</dt><dd>courses to choose from</dd></div>
+              <div><dt>5</dt><dd>units in every course</dd></div>
+              <div><dt>5</dt><dd>kinds of study resource in every unit</dd></div>
+              <div><dt>4 Nov</dt><dd>when the first courses open</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section className="wrap sec">
+          <h2 className="h2">Why students will love it</h2>
+          <p className="sub">Built to cut the clutter and show only what matters for your exam.</p>
           <div className="why">
             {why.map((w, i) => (
-              <div className={`why-card c${i % 2}`} key={w.t}>
+              <div className={`wcard w${i % 4}`} key={w.t}>
                 <div><h3>{w.t}</h3><p>{w.d}</p></div>
                 <img src={`/home/${w.img}.webp`} alt="" loading="lazy" />
               </div>
@@ -67,45 +121,52 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="band">
+        <section className="yband">
           <div className="wrap">
-            <h2 className="section light">See it in action</h2>
-            <p className="lede2 light">Real screens from the app.</p>
+            <h2 className="h2">See it in action</h2>
+            <p className="sub">Real screens from the app.</p>
             <Strip images={[1, 2, 3, 4, 5, 6].map((n) => `/home/slide_${n}.webp`)} />
           </div>
         </section>
 
-        <section className="wrap">
-          <h2 className="section">What is inside every unit</h2>
-          <div className="grid">
-            {inside.map(({ t, d, I }) => (
-              <div className="card icard" key={t}><I className="bigicon" strokeWidth={1.4} aria-hidden /><h3>{t}</h3><p>{d}</p></div>
+        <section className="wrap sec">
+          <h2 className="h2">What is inside every unit</h2>
+          <div className="inside">
+            {inside.map(({ t, d, I }, i) => (
+              <div className={`icard2 i${i % 3}`} key={t}><span className="ic"><I size={26} strokeWidth={2.2} aria-hidden /></span><h3>{t}</h3><p>{d}</p></div>
             ))}
           </div>
         </section>
 
-        <section className="wrap two">
+        <section className="nband">
+          <div className="wrap">
+            <h2 className="h2 w">Students are walking in ready</h2>
+            <p className="sub w">Early users, from first year to final year.</p>
+            <Testimonials />
+          </div>
+        </section>
+
+        <section className="wrap sec twocol">
           <div>
-            <h2 className="section">Who makes the content</h2>
-            <p className="lede2">Every course is written around your university syllabus and prepared by the instructors who teach it, so what you revise matches what you are examined on.</p>
-            <h2 className="section">Mudras: earn them by learning</h2>
-            <p className="lede2">Mudras are Paartha&apos;s reward points. Study effort that adds up earns them: a daily streak, finishing five resources in a day, a completed unit or course. They take money off courses. Some are promotional, some are earned. Terms apply.</p>
+            <h2 className="h2">Who makes the content</h2>
+            <p className="sub">Every course is written around your university syllabus and prepared by the instructors who teach it, so what you revise matches what you are examined on.</p>
+            <h2 className="h2" style={{ marginTop: 40 }}>Mudras: earn them by learning</h2>
+            <p className="sub">Mudras are Paartha&apos;s reward points. Study effort that adds up earns them: a daily streak, finishing five resources in a day, a completed unit or course. They take money off courses. Some are promotional, some are earned. Terms apply.</p>
           </div>
           <img className="side" src="/home/char_5_breathe.webp" alt="" loading="lazy" />
         </section>
 
-        <section className="wrap faq2">
-          <div>
-            <h2 className="section">Questions, answered</h2>
+        <section className="wrap sec faqx">
+          <h2 className="h2">Questions, answered</h2>
+          <div className="faqlist">
             {faq.map((i) => (
               <details key={i.q}><summary>{i.q}</summary><p>{i.a}</p></details>
             ))}
-            <p className="fine">More on the <Link href="/support">support page</Link>.</p>
           </div>
-          <img className="side" src="/home/faq.webp" alt="" loading="lazy" />
+          <p className="fine dk">More on the <Link href="/support">support page</Link>.</p>
         </section>
 
-        <section className="cta" id="download">
+        <section className="dl" id="download">
           <div className="wrap">
             <h2>Download Paartha</h2>
             <p>Your partner for exam success.</p>
