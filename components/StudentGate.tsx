@@ -1,6 +1,7 @@
 "use client";
 
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
+import AuthShell from "@/components/AuthShell";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { signUp, startSession } from "@/lib/student";
@@ -69,23 +70,27 @@ export default function StudentGate({ children }: { children: (user: User) => Re
 
   if (phase === "signedOut")
     return (
-      <section className="acct-card" style={{ maxWidth: 560, margin: "48px auto" }}>
+      <AuthShell art="char_1_learn" kicker="Welcome to Paartha" title="Know what to study next." points={["Notes, important questions and quizzes for every unit", "A study plan built around your exam dates", "Your courses, ready on every device"]}>
+      <section className="acct-card">
         <h2>Get started with Paartha</h2>
         <p className="muted">Sign in with the Google account you use (or will use) for Paartha. We&rsquo;ll set up your account and show you your courses.</p>
         {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
         <button className="acct-btn dark" disabled={busy} onClick={signIn}>Continue with Google</button>
       </section>
+      </AuthShell>
     );
 
   if (phase === "signUp" && user) return <SignUpForm user={user} busy={busy} message={message} onSubmit={register} />;
 
   return (
-    <section className="acct-card" style={{ maxWidth: 560, margin: "48px auto" }}>
+    <AuthShell art="char_3_foryou" kicker="Hmm" title="That didn't work." >
+    <section className="acct-card">
       <h2>Something went wrong</h2>
       {message && <p className="acct-msg bad">{message.text}</p>}
       <button className="acct-btn dark" onClick={() => user && begin(user)}>Try again</button>
       <button className="acct-btn" onClick={() => signOut(auth)}>Sign out</button>
     </section>
+    </AuthShell>
   );
 }
 
@@ -95,7 +100,8 @@ function SignUpForm({ user, busy, message, onSubmit }: { user: User; busy: boole
   const [invite, setInvite] = useState("");
   const ok = name.trim().length > 0 && roll.trim().length >= 3;
   return (
-    <form className="acct-card" style={{ maxWidth: 560, margin: "48px auto" }} onSubmit={(e) => { e.preventDefault(); if (ok) onSubmit(name.trim(), roll.trim(), invite.trim().replace(/^@/, "")); }}>
+    <AuthShell art="char_6_profile" kicker="Almost there" title="Two details and you're in." points={["Use the same Google account in the app later", "Your semester is set from your roll number"]}>
+    <form className="acct-card" onSubmit={(e) => { e.preventDefault(); if (ok) onSubmit(name.trim(), roll.trim(), invite.trim().replace(/^@/, "")); }}>
       <h2>Create your Paartha account</h2>
       <p className="muted">Signed in as {user.email}. Two details and you&rsquo;re in; use the same Google account in the app later.</p>
       {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
@@ -105,5 +111,6 @@ function SignUpForm({ user, busy, message, onSubmit }: { user: User; busy: boole
       <button className="acct-btn dark" type="submit" disabled={!ok || busy}>{busy ? "Creating your account…" : "Continue"}</button>
       <button className="acct-btn" type="button" onClick={() => signOut(auth)}>Use a different account</button>
     </form>
+    </AuthShell>
   );
 }

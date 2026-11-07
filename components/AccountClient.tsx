@@ -1,6 +1,7 @@
 "use client";
 
 import { ArrowRight, AtSign, BookOpen, Coins, MessageCircle } from "lucide-react";
+import AuthShell from "@/components/AuthShell";
 import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
 import { type Account, ApiError, createOrder, getAccount, verifyOrder } from "@/lib/api";
@@ -103,6 +104,7 @@ export default function AccountClient() {
 
   if (phase === "signedOut")
     return (
+      <AuthShell art="char_4_mudras" kicker="Your Paartha account" title="Your mudras, courses and details." points={["See and top up your mudras", "Every course you have bought", "Manage your account on the web"]}>
       <section className="acct-card">
         <h2>Sign in</h2>
         <p className="muted">Use the same Google or Apple account you use for Paartha.</p>
@@ -110,15 +112,18 @@ export default function AccountClient() {
         <button className="acct-btn dark" disabled={signingIn} onClick={() => signIn("google")}>Continue with Google</button>
         <button className="acct-btn" disabled={signingIn} onClick={() => signIn("apple")}>Continue with Apple</button>
       </section>
+      </AuthShell>
     );
 
   if (phase === "notRegistered")
     return (
+      <AuthShell art="char_3_foryou" kicker="No account yet" title="We couldn't find you.">
       <section className="acct-card">
         <h2>We couldn&rsquo;t find a Paartha account</h2>
         <p className="muted">{user?.email ?? "This sign-in"} isn&rsquo;t registered with Paartha yet. Sign in with the account you registered with, or write to <a href={`mailto:${SUPPORT}`}>{SUPPORT}</a>.</p>
         <button className="acct-btn" onClick={() => signOut(auth)}>Sign out</button>
       </section>
+      </AuthShell>
     );
 
   if (phase === "error" || !account)
@@ -134,11 +139,12 @@ export default function AccountClient() {
   const pack = account.packs.find((p) => p.id === selected);
   return (
     <>
-      <section className="acct-hero">
+      <section className="acct-banner">
+        <img className="abimg" src="/home/char_6_profile.webp" alt="" />
         <div className="avatar">{account.image ? <img src={account.image} alt="" /> : <span>{account.name.slice(0, 1).toUpperCase()}</span>}</div>
         <div>
           <h2>{account.name}</h2>
-          <p className="muted">Joined in {joined(account.joined_at)}</p>
+          <p>Joined in {joined(account.joined_at)}</p>
         </div>
         <button className="acct-link" onClick={() => signOut(auth)}>Sign out</button>
       </section>
@@ -169,7 +175,8 @@ export default function AccountClient() {
         </div>
       </section>
 
-      <section className="acct-card" id="get-mudras">
+      <section className="acct-card gm" id="get-mudras">
+        <img className="gmimg" src="/home/char_4_mudras.webp" alt="" />
         <h2>Get mudras</h2>
         <p className="muted">Mudras take money off courses in Paartha. Choose a pack and pay securely with Razorpay (UPI, cards or net banking).</p>
         <div className="packs">
