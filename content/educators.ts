@@ -5,7 +5,7 @@ export const EDUCATORS: Educator[] = [
   { name: "Manas Malla", badge: "Ex-GITAMite", courses: ["Object Oriented Programming", "Computer Organization & Architecture", "Computer Graphics & Multimedia", "Total Quality Management", "Pattern Recognition & ML"], photo: "/educators/manas.webp" },
   { name: "Nithin Raghavendra", badge: "Ex-GITAMite", courses: ["Project Management"], photo: "/educators/nithin.webp" },
   { name: "Praveena Gorle", badge: "Sophomore", courses: ["Object Oriented Programming"] },
-  { name: "Parasubotu Yashasvi", badge: "Sophomore", courses: ["Probability & Statistics"] },
+  { name: "Parasubotu Yashasvi", badge: "Sophomore", courses: ["Probability & Statistics"], photo: "/educators/yashasvi.webp" },
   { name: "Jhanshi Rani Gurugubelli", badge: "Sophomore", courses: ["Data Structures"], photo: "/educators/jhanshi.webp" },
   { name: "Satya Jahnavi Ashok Solanki", badge: "Junior", courses: ["Computer Networks"] },
   { name: "Nekkanti Dharni", badge: "Junior", courses: ["Machine Learning"] },
