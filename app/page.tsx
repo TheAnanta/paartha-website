@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Footer, Header } from "@/components/Chrome";
-import PreRegisterButton from "@/components/PreRegisterButton";
 import Stores from "@/components/Stores";
 import Strip from "@/components/Strip";
 import Testimonials from "@/components/Testimonials";
@@ -38,13 +37,13 @@ const inside = [
   { t: "Study plan", I: CalendarCheck, d: "A week plan that puts the best resources first." },
 ];
 
-const TICKER = ["know what to study next", "important questions by marks", "the night before, sorted", "notes · cheatsheets · quizzes", "pre-register from 4 Nov"];
+const TICKER = ["know what to study next", "important questions by marks", "the night before, sorted", "notes · cheatsheets · quizzes", "now live on Android, iOS, macOS and Windows"];
 
 export default function Home() {
   const faq = FAQ.flatMap((g) => g.items).filter((i) => !/stuck|ticket|refund|language/i.test(i.q)).slice(0, 8);
   return (
     <>
-      <div className="topbar"><Link href="/courses">Courses open 4 Nov · Pre-register now at a lower price <ArrowRight size={16} aria-hidden /></Link></div>
+      <div className="topbar"><Link href="/courses">Paartha is live · Get your courses now <ArrowRight size={16} aria-hidden /></Link></div>
       <Header />
       <main className="hv">
         <section className="herox">
@@ -58,10 +57,10 @@ export default function Home() {
                 <li><Check size={20} strokeWidth={3} aria-hidden /> Written for your university syllabus, by the people who teach it</li>
               </ul>
               <div className="ctas">
-                <PreRegisterButton className="big yellow" label="Pre-register now" />
+                <Link className="big yellow" href="/courses">Get your courses</Link>
                 <a className="big ghostw" href="#download">Get the app</a>
               </div>
-              <p className="fine">Courses open on 4 Nov 2026 · pre-register at a lower price</p>
+              <p className="fine">Live now on Android, iOS, macOS and Windows</p>
             </div>
             <div className="hart">
               <div className="blob" aria-hidden />
@@ -72,9 +71,9 @@ export default function Home() {
           </div>
           <div className="wrap duo">
             <div className="duocard dyellow">
-              <h2>Pre-register for your courses</h2>
-              <p>Lock in the lower price before courses open on 4 Nov.</p>
-              <PreRegisterButton className="big navy" label="Pre-register now" />
+              <h2>Get your courses</h2>
+              <p>Pick your subjects and start revising today.</p>
+              <Link className="big navy" href="/courses">Browse courses <ArrowRight size={18} aria-hidden /></Link>
             </div>
             <div className="duocard dred">
               <h2>Get the app on any device</h2>
@@ -103,7 +102,7 @@ export default function Home() {
               <div><dt>19</dt><dd>courses to choose from</dd></div>
               <div><dt>5</dt><dd>units in every course</dd></div>
               <div><dt>5</dt><dd>kinds of study resource in every unit</dd></div>
-              <div><dt>4 Nov</dt><dd>when the first courses open</dd></div>
+              <div><dt>4</dt><dd>platforms: Android, iOS, macOS and Windows</dd></div>
             </dl>
           </div>
         </section>

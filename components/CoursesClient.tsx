@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import StudentGate from "@/components/StudentGate";
 import { auth } from "@/lib/firebase";
 import { addToCart, type Course, getCart, getCensus, listCourses, PLAN } from "@/lib/student";
-import { availability, blurb, CourseImage, day, Desc, inr, Members } from "@/components/shop";
+import { availability, blurb, CourseImage, Desc, inr, Members } from "@/components/shop";
 
 export default function CoursesClient() {
   return <StudentGate>{(user) => <Courses user={user} />}</StudentGate>;
@@ -55,13 +55,12 @@ function Courses({ user }: { user: User }) {
     for (const c of courses.filter((x) => !x.purchased)) m.set(c.category, [...(m.get(c.category) ?? []), c]);
     return [...m.entries()];
   }, [courses]);
-  const availableOn = day((open[0] ?? mine[0])?.available_from ?? null);
 
   return (
     <>
       <div className="acct-hero" style={{ marginTop: 24 }}>
         <div>
-          <h1 style={{ fontSize: 40, letterSpacing: -1, margin: 0 }}>Pre-register your battle plan</h1>
+          <h1 style={{ fontSize: 40, letterSpacing: -1, margin: 0 }}>Your courses</h1>
           <p className="muted" style={{ margin: 0 }}>Hi {user.displayName?.split(" ")[0] ?? "there"}, these are your courses.</p>
         </div>
         <a className="acct-link" href="/cart">Your cart</a>
@@ -70,14 +69,14 @@ function Courses({ user }: { user: User }) {
 
       <section className="acct-card prereg">
         <p className="label">{PLAN.name} · {PLAN.tag}</p>
-        <h2>What you get when you pre-register</h2>
-        <p className="muted">{availableOn ? `Course content opens on ${availableOn}.` : "Course content opens soon."} Pay now at the pre-registration price; every unit stays locked until then, and you&rsquo;ll be notified in the app when your course opens.</p>
+        <h2>What you get with every course</h2>
+        <p className="muted">Every unit unlocks as soon as you buy the course, and shows up in the app right away.</p>
         <ul className="feat">{PLAN.features.map((f) => (<li key={f}>{f}</li>))}</ul>
         <p className="muted small">Mudras are applied to your order automatically (10 mudras = ₹1): promotional mudras cover up to 250 mudras (₹25) of each course, and mudras you earned by effort can cover more. Prices include GST.</p>
       </section>
 
       {error && <p className="acct-msg bad">{error}</p>}
-      {grouped.length === 0 && <p className="muted">No courses are open for pre-registration right now.</p>}
+      {grouped.length === 0 && <p className="muted">No courses are available right now.</p>}
       {grouped.map(([category, list]) => (
         <section key={category}>
           <h2 className="section" style={{ marginTop: 28 }}>{category}</h2>
@@ -107,7 +106,7 @@ function Courses({ user }: { user: User }) {
               <article className="ccard done" key={c.id}>
                 <div className="ctop"><span className="tag">{c.code}</span></div>
                 <h3>{c.title}</h3>
-                <p className="avail">{c.pre_registration ? `You’re pre-registered. ${availability(c.available_from)}` : "You own this course. Open it in the app."}</p>
+                <p className="avail">{c.pre_registration ? `You’ve bought this course. Open it in the app.` : "You own this course. Open it in the app."}</p>
               </article>
             ))}
           </div>

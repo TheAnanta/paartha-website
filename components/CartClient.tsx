@@ -81,7 +81,7 @@ function CartPage({ user }: { user: User }) {
       const p = await startPayment(token);
       paymentRef.current.id = p.payment_id;
       if (p.amount > 0 && p.razorpay_order_id && p.razorpay_key_id) {
-        const r = await openCheckout({ keyId: p.razorpay_key_id, orderId: p.razorpay_order_id, amountRupees: p.amount, description: `Pre-registration: ${cart.items.length} course${cart.items.length > 1 ? "s" : ""}`, email: user.email ?? undefined, name: user.displayName ?? undefined });
+        const r = await openCheckout({ keyId: p.razorpay_key_id, orderId: p.razorpay_order_id, amountRupees: p.amount, description: `Paartha: ${cart.items.length} course${cart.items.length > 1 ? "s" : ""}`, email: user.email ?? undefined, name: user.displayName ?? undefined });
         if (r.status === "closed") { setFlow(null); return; } // closed the payment window: back to the cart
         if (r.status === "failed") { setFlow({ kind: "failed", code: "payment_failed", paymentId: p.payment_id }); return; }
         paymentRef.current.razorpayPaymentId = r.paymentId;
@@ -129,7 +129,7 @@ function CartPage({ user }: { user: User }) {
               <article className="ccard line" key={c.id}>
                 <Thumb c={c} />
                 <div className="lmain">
-                  <div className="ctop"><span className="tag">{c.code}</span><span className="tag out">Pre-registration</span></div>
+                  <div className="ctop"><span className="tag">{c.code}</span></div>
                   <h3>{c.title}</h3>
                   <Members n={census[c.id]} />
                   <p className="avail">{availability(c.available_from)}</p>
@@ -147,7 +147,7 @@ function CartPage({ user }: { user: User }) {
                   <h2 className="section" style={{ margin: 0 }}>Add more courses</h2>
                   {more.length > 1 && <AddAll />}
                 </div>
-                <p className="muted small">Your other courses, at the pre-registration price. Add them now, before the price goes up.</p>
+                <p className="muted small">Your other courses. Add them now to get everything in one go.</p>
                 {more.map((c) => (
                   <article className="ccard line more" key={c.id}>
                     <Thumb c={c} />
@@ -182,7 +182,7 @@ function CartPage({ user }: { user: User }) {
             </dl>
             {savings > 0 && <p className="save">You save {inr(savings)} against the regular price.</p>}
             <button className="acct-btn dark" disabled={busy !== null || cart.items.length === 0} onClick={pay}>
-              {busy === "pay" ? "Opening payment…" : cart.total > 0 ? `Pay ${inr(cart.total)}` : "Pre-register with mudras"}
+              {busy === "pay" ? "Opening payment…" : cart.total > 0 ? `Pay ${inr(cart.total)}` : "Get with mudras"}
             </button>
             <p className="muted small">Secure payment by Razorpay: UPI, cards or net banking. Mudras are applied automatically (10 mudras = ₹1). Prices include GST.</p>
           </aside>

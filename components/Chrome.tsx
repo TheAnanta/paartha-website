@@ -11,7 +11,7 @@ export function Header({ cta = true }: { cta?: boolean }) {
         <Link href="/terms">Terms</Link>
         <Link href="/privacy">Privacy</Link>
         <Link href="/account">Account</Link>
-        {cta && <Link href="/courses" className="navcta">Pre-register</Link>}
+        {cta && <Link href="/courses" className="navcta">Get courses</Link>}
       </nav>
     </header>
   );
