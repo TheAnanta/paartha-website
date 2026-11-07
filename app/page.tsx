@@ -158,7 +158,10 @@ export default function Home() {
 
         <section className="wrap sec faqx">
           <h2 className="h2">Questions, answered</h2>
-          <FaqList items={faq} />
+          <div className="faqrow">
+            <FaqList items={faq} />
+            <img className="side" src="/home/faq.webp" alt="" loading="lazy" />
+          </div>
           <p className="fine dk">More on the <Link href="/support">support page</Link>.</p>
         </section>
 

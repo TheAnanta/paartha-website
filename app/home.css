@@ -949,3 +949,7 @@
     -webkit-box-decoration-break: clone;
   }
 }
+.faqrow { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 36px; align-items: end; margin-top: 8px; }
+.faqrow .faqlist { margin-top: 26px; max-width: none; }
+.faqrow .side { width: 230px; height: auto; display: block; }
+@media (max-width: 900px) { .faqrow { grid-template-columns: 1fr; } .faqrow .side { width: 170px; justify-self: end; margin-top: -8px; } }
