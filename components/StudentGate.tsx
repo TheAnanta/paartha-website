@@ -2,6 +2,7 @@
 
 import { GoogleAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import AuthShell from "@/components/AuthShell";
+import { AppleLogo, GoogleLogo } from "@/components/AuthLogos";
 import { type ReactNode, useCallback, useEffect, useState } from "react";
 import { auth } from "@/lib/firebase";
 import { signUp, startSession } from "@/lib/student";
@@ -75,7 +76,7 @@ export default function StudentGate({ children }: { children: (user: User) => Re
         <h2>Get started with Paartha</h2>
         <p className="muted">Sign in with the Google account you use (or will use) for Paartha. We&rsquo;ll set up your account and show you your courses.</p>
         {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
-        <button className="acct-btn dark" disabled={busy} onClick={signIn}>Continue with Google</button>
+        <button className="acct-btn google" disabled={busy} onClick={signIn}><GoogleLogo />Continue with Google</button>
       </section>
       </AuthShell>
     );

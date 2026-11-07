@@ -366,3 +366,8 @@ body .authform .acct-card { border: 0; box-shadow: none; background: transparent
 .acct-card.gm .pack { border: 3px solid #14204a; background: #fff; }
 .acct-card.gm .pack.on { background: #14204a; color: #fff; } .acct-card.gm .pack.on span { color: #ffffffb3; } .acct-card.gm .pack.on em { color: #ffc933; }
 @media (max-width: 640px) { .acct-card.gm { padding-right: 24px; padding-bottom: 150px; } .acct-banner .abimg { opacity: .35; } }
+
+.acct-btn.google, .acct-btn.apple { display: flex; align-items: center; justify-content: center; gap: 12px; }
+.authform .acct-btn.google { background: #fff; color: #14204a; }
+.authform .acct-btn.apple { background: #000; color: #fff; border-color: #000; box-shadow: 0 5px 0 #14204a; }
+.authshell { margin-bottom: 80px; }

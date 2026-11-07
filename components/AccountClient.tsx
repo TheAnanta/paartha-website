@@ -2,6 +2,7 @@
 
 import { ArrowRight, AtSign, BookOpen, Coins, MessageCircle } from "lucide-react";
 import AuthShell from "@/components/AuthShell";
+import { AppleLogo, GoogleLogo } from "@/components/AuthLogos";
 import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
 import { type Account, ApiError, createOrder, getAccount, verifyOrder } from "@/lib/api";
@@ -109,8 +110,8 @@ export default function AccountClient() {
         <h2>Sign in</h2>
         <p className="muted">Use the same Google or Apple account you use for Paartha.</p>
         {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
-        <button className="acct-btn dark" disabled={signingIn} onClick={() => signIn("google")}>Continue with Google</button>
-        <button className="acct-btn" disabled={signingIn} onClick={() => signIn("apple")}>Continue with Apple</button>
+        <button className="acct-btn google" disabled={signingIn} onClick={() => signIn("google")}><GoogleLogo />Continue with Google</button>
+        <button className="acct-btn apple" disabled={signingIn} onClick={() => signIn("apple")}><AppleLogo />Continue with Apple</button>
       </section>
       </AuthShell>
     );
