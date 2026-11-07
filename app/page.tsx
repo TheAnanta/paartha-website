@@ -3,6 +3,7 @@ import { Footer, Header } from "@/components/Chrome";
 import Stores from "@/components/Stores";
 import Strip from "@/components/Strip";
 import FaqList from "@/components/FaqList";
+import Educators from "@/components/Educators";
 import Testimonials from "@/components/Testimonials";
 import { ArrowRight, BookOpenCheck, CalendarCheck, Check, ClipboardCheck, FileText, Flame, ListChecks, Moon, Network, Sparkles, Target, Trophy, Zap } from "lucide-react";
 import { FAQ } from "@/content/faq";
@@ -150,6 +151,12 @@ export default function Home() {
               <div className={`icard2 i${i % 3}`} key={t}><span className="ic"><I size={26} strokeWidth={2.2} aria-hidden /></span><h3>{t}</h3><p>{d}</p></div>
             ))}
           </div>
+        </section>
+
+        <section className="wrap sec" id="educators">
+          <h2 className="h2">Meet our Educators</h2>
+          <p className="sub">Every course is written and reviewed by students and alumni who have been through these exact courses, so it comes from people who know the exam, not from a template.</p>
+          <Educators />
         </section>
 
         <section className="nband">
