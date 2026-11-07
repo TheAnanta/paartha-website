@@ -106,24 +106,24 @@ export default function AccountClient() {
   if (phase === "signedOut")
     return (
       <AuthShell art="char_4_mudras" kicker="Your Paartha account" title="Your mudras, courses and details." points={["See and top up your mudras", "Every course you have bought", "Manage your account on the web"]}>
-      <section className="acct-card">
-        <h2>Sign in</h2>
-        <p className="muted">Use the same Google or Apple account you use for Paartha.</p>
-        {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
-        <button className="acct-btn google" disabled={signingIn} onClick={() => signIn("google")}><GoogleLogo />Continue with Google</button>
-        <button className="acct-btn apple" disabled={signingIn} onClick={() => signIn("apple")}><AppleLogo />Continue with Apple</button>
-      </section>
+        <section className="acct-card">
+          <h2>Sign in</h2>
+          <p className="muted">Use the same Google or Apple account you use for Paartha.</p>
+          {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
+          <button className="acct-btn google" disabled={signingIn} onClick={() => signIn("google")}><GoogleLogo />Continue with Google</button>
+          <button className="acct-btn apple" disabled={signingIn} onClick={() => signIn("apple")}><AppleLogo />Continue with Apple</button>
+        </section>
       </AuthShell>
     );
 
   if (phase === "notRegistered")
     return (
       <AuthShell art="char_3_foryou" kicker="No account yet" title="We couldn't find you.">
-      <section className="acct-card">
-        <h2>We couldn&rsquo;t find a Paartha account</h2>
-        <p className="muted">{user?.email ?? "This sign-in"} isn&rsquo;t registered with Paartha yet. Sign in with the account you registered with, or write to <a href={`mailto:${SUPPORT}`}>{SUPPORT}</a>.</p>
-        <button className="acct-btn" onClick={() => signOut(auth)}>Sign out</button>
-      </section>
+        <section className="acct-card">
+          <h2>We couldn&rsquo;t find a Paartha account</h2>
+          <p className="muted">{user?.email ?? "This sign-in"} isn&rsquo;t registered with Paartha yet. Sign in with the account you registered with, or write to <a href={`mailto:${SUPPORT}`}>{SUPPORT}</a>.</p>
+          <button className="acct-btn" onClick={() => signOut(auth)}>Sign out</button>
+        </section>
       </AuthShell>
     );
 
@@ -142,7 +142,7 @@ export default function AccountClient() {
     <>
       <section className="acct-banner">
         <img className="abimg" src="/home/char_6_profile.webp" alt="" />
-        <div className="avatar">{account.image ? <img src={account.image} alt="" /> : <span>{account.name.slice(0, 1).toUpperCase()}</span>}</div>
+        <div className="avatar">{account.image ? <img src={account.image} alt="" referrerPolicy="no-referrer" /> : <span>{account.name.slice(0, 1).toUpperCase()}</span>}</div>
         <div>
           <h2>{account.name}</h2>
           <p>Joined in {joined(account.joined_at)}</p>

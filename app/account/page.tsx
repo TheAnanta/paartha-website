@@ -1,7 +1,7 @@
 import AccountClient from "@/components/AccountClient";
 import { Footer, Header } from "@/components/Chrome";
 
-export const metadata = { title: "Your account" };
+export const metadata = { title: "Your account", robots: { index: false, follow: false } };
 
 export default function Account() {
   return (

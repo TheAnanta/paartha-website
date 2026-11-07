@@ -1,7 +1,7 @@
 import CartClient from "@/components/CartClient";
 import { Footer, Header } from "@/components/Chrome";
 
-export const metadata = { title: "Your cart" };
+export const metadata = { title: "Your cart", robots: { index: false, follow: false } };
 
 export default function Cart() {
   return (

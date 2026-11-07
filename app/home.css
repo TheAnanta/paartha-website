@@ -139,7 +139,7 @@
   width: fit-content;
   font-style: normal;
   color: #eab830;
-  text-shadow: 0 4px 0 rgba(0, 0, 0, 0.3);
+  text-shadow: 0 10px 0 rgba(0, 0, 0, 0.32);
 }
 
 .ticks {
@@ -823,7 +823,7 @@
 }
 
 .faqitem.on .faqq {
-  background: #e0383e;
+  background: #bf3135;
   color: #fff;
   border-radius: 20px 20px 0 0;
 }
@@ -835,7 +835,7 @@
 
 .faqitem.on .faqq span::before,
 .faqitem.on .faqq span::after {
-  background: #e0383e;
+  background: #bf3135;
 }
 
 .faqwrap {

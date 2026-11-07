@@ -7,10 +7,12 @@ import Testimonials from "@/components/Testimonials";
 import { ArrowRight, BookOpenCheck, CalendarCheck, Check, ClipboardCheck, FileText, Flame, ListChecks, Moon, Network, Sparkles, Target, Trophy, Zap } from "lucide-react";
 import { FAQ } from "@/content/faq";
 import "./home.css";
+import { DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata = {
-  title: "Paartha: know what to study next",
-  description: "Notes, important questions, flashcards, quizzes and a study plan for every unit of your university course.",
+  title: { absolute: "Paartha (Partha): GITAM exam prep app for notes, important questions and quizzes" },
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
 };
 
 const needs = [
@@ -42,8 +44,20 @@ const TICKER = ["know what to study next", "important questions by marks", "the 
 
 export default function Home() {
   const faq = FAQ.flatMap((g) => g.items).filter((i) => !/stuck|ticket|refund|language/i.test(i.q)).slice(0, 8);
+  const ld = [
+    { "@context": "https://schema.org", "@type": "Organization", name: "the ananta", url: "https://theananta.in", brand: { "@type": "Brand", name: SITE_NAME }, logo: `${SITE_URL}/og_image.png` },
+    { "@context": "https://schema.org", "@type": "WebSite", name: SITE_NAME, alternateName: ["Partha", "Paartha app", "Paartha exam prep"], url: SITE_URL, inLanguage: "en-IN" },
+    {
+      "@context": "https://schema.org", "@type": "SoftwareApplication", name: SITE_NAME, alternateName: ["Partha", "Paartha exam prep"], applicationCategory: "EducationalApplication",
+      operatingSystem: "Android, iOS, macOS, Windows", description: DESCRIPTION, url: SITE_URL, image: `${SITE_URL}/og_image.png`,
+      audience: { "@type": "EducationalAudience", educationalRole: "student", audienceType: "GITAM engineering students" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "INR" },
+    },
+    { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faq.map((i) => ({ "@type": "Question", name: i.q, acceptedAnswer: { "@type": "Answer", text: i.a } })) },
+  ];
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/</g, "\\u003c") }} />
       <div className="topbar"><Link href="/courses">Paartha is live · Get your courses now <ArrowRight size={16} aria-hidden /></Link></div>
       <Header />
       <main className="hv">
@@ -64,8 +78,8 @@ export default function Home() {
               <p className="fine">Live now on Android, iOS, macOS and Windows</p>
             </div>
             <div className="hart">
-              <div className="blob" aria-hidden />
-              <img src="/home/hero_study.webp" alt="Three Paartha students surrounded by books and loose papers the night before an exam" width={747} height={1000} />
+              {/* <div className="blob" aria-hidden /> */}
+              <img src="/home/hero_study.png" alt="Three Paartha students surrounded by books and loose papers the night before an exam" width={747} height={1000} />
               <span className="hchip c1"><BookOpenCheck size={18} aria-hidden /> Exam tomorrow, 9 AM</span>
               <span className="hchip c2 ok"><Check size={18} strokeWidth={3} aria-hidden /> Important questions, ready</span>
             </div>

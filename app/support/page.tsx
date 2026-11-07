@@ -1,7 +1,11 @@
 import { Footer, Header, SUPPORT_EMAIL } from "@/components/Chrome";
 import { FAQ } from "@/content/faq";
 
-export const metadata = { title: "Support" };
+export const metadata = {
+  title: "Support and FAQ",
+  description: "Help with Paartha, the GITAM exam prep app: signing in, courses, mudras, payments and your account.",
+  alternates: { canonical: "/support" },
+};
 
 export default function Support() {
   return (
