@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Footer, Header } from "@/components/Chrome";
 import Stores from "@/components/Stores";
 import Strip from "@/components/Strip";
+import FaqList from "@/components/FaqList";
 import Testimonials from "@/components/Testimonials";
 import { ArrowRight, BookOpenCheck, CalendarCheck, Check, ClipboardCheck, FileText, Flame, ListChecks, Moon, Network, Sparkles, Target, Trophy, Zap } from "lucide-react";
 import { FAQ } from "@/content/faq";
@@ -157,11 +158,7 @@ export default function Home() {
 
         <section className="wrap sec faqx">
           <h2 className="h2">Questions, answered</h2>
-          <div className="faqlist">
-            {faq.map((i) => (
-              <details key={i.q}><summary>{i.q}</summary><p>{i.a}</p></details>
-            ))}
-          </div>
+          <FaqList items={faq} />
           <p className="fine dk">More on the <Link href="/support">support page</Link>.</p>
         </section>
 
