@@ -773,9 +773,11 @@
 .faqx summary { list-style: none; display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 18px 22px; cursor: pointer; font-weight: 800; font-size: 18px; color: #14204a; background: #fff; border: 3px solid #14204a; border-radius: 20px; transition: background .15s, color .15s; }
 .faqx summary::-webkit-details-marker { display: none; }
 .faqx summary::after { content: "+"; flex: none; width: 34px; height: 34px; border-radius: 50%; background: #14204a; color: #ffc933; display: grid; place-items: center; font-size: 22px; line-height: 1; transition: transform .2s; }
-.faqx details[open] summary { background: #e0383e; color: #fff; }
+.faqx details[open] summary { background: #e0383e; color: #fff; border-radius: 20px 20px 0 0; position: relative; z-index: 2; }
 .faqx details[open] summary::after { transform: rotate(45deg); background: #fff; color: #e0383e; }
-.faqx details p { margin: 10px 0 4px; padding: 18px 22px; background: #ffc933; color: #14204a; border: 3px solid #14204a; border-radius: 20px; font-size: 16.5px; font-weight: 500; }
+.faqx details p { margin: 0; padding: 18px 22px 20px; background: #ffc933; color: #14204a; border: 3px solid #14204a; border-top: 0; border-radius: 0 0 20px 20px; font-size: 16.5px; font-weight: 500; position: relative; z-index: 1; animation: faqslide .38s cubic-bezier(.2,.8,.2,1); }
+@keyframes faqslide { from { transform: translateY(-100%); clip-path: inset(100% 0 0 0); opacity: 0; } 40% { opacity: 1; } to { transform: none; clip-path: inset(0); opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .faqx details p { animation: none; } }
 .fine.dk {
   color: #14204a99;
   margin-top: 16px;
