@@ -1,5 +1,6 @@
 import { EDUCATORS, type Educator } from "@/content/educators";
 
+const MAX_COURSES = 2;
 const TONES = ["navy", "red", "yellow"] as const;
 
 function Card({ e, i }: { e: Educator; i: number }) {
@@ -14,7 +15,10 @@ function Card({ e, i }: { e: Educator; i: number }) {
       </div>
       <h3>{e.name}</h3>
       <span className="edubadge">{e.badge}</span>
-      <ul>{e.courses.map((c) => (<li key={c}>{c}</li>))}</ul>
+      <ul>
+        {e.courses.slice(0, MAX_COURSES).map((c) => (<li key={c}>{c}</li>))}
+        {e.courses.length > MAX_COURSES && <li className="edumore" title={e.courses.slice(MAX_COURSES).join(", ")}>+{e.courses.length - MAX_COURSES}</li>}
+      </ul>
     </article>
   );
 }
