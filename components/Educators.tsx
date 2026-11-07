@@ -16,8 +16,9 @@ function Card({ e, i }: { e: Educator; i: number }) {
       <h3>{e.name}</h3>
       <span className="edubadge">{e.badge}</span>
       <ul>
-        {e.courses.slice(0, MAX_COURSES).map((c) => (<li key={c}>{c}</li>))}
-        {e.courses.length > MAX_COURSES && <li className="edumore" title={e.courses.slice(MAX_COURSES).join(", ")}>+{e.courses.length - MAX_COURSES}</li>}
+        {e.courses.slice(0, MAX_COURSES).map((c, k) => (<li key={c} className={k > 0 ? "edu-c2" : undefined}>{c}</li>))}
+        {e.courses.length > MAX_COURSES && <li className="edumore edu-pd" title={e.courses.slice(MAX_COURSES).join(", ")}>+{e.courses.length - MAX_COURSES}</li>}
+        {e.courses.length > 1 && <li className="edumore edu-pm" title={e.courses.slice(1).join(", ")}>+{e.courses.length - 1}</li>}
       </ul>
     </article>
   );

@@ -1099,3 +1099,11 @@
 @media (max-width: 700px) { .educard { width: 190px; padding: 18px 12px 16px; } .eduav { width: 76px; height: 76px; } .educard h3 { font-size: 16px; } }
 @media (prefers-reduced-motion: reduce) { .edutrack { animation: none; } .edurow { overflow-x: auto; } .edudup { display: none; } }
 .edumore { justify-self: center; background: #ffc933; color: #14204a; font-weight: 800; border-radius: 999px; padding: 1px 10px; margin-top: 2px; }
+
+.edu-pm { display: none; }
+@media (max-width: 700px) {
+  .edu-c2, .edu-pd { display: none; }
+  .edu-pm { display: block; }
+  .edumarq { margin-left: -24px; margin-right: -24px; }
+  .edurow { padding-left: 0; padding-right: 0; -webkit-mask-image: none; mask-image: none; }
+}
