@@ -139,7 +139,11 @@
   width: fit-content;
   font-style: normal;
   color: #eab830;
-  background: linear-gradient(transparent 84%, #bf3135 24% 95%, transparent 95%);
+  text-decoration: underline;
+  text-decoration-color: #bf3135;
+  text-decoration-thickness: 0.09em;
+  text-underline-offset: 0.08em;
+  text-decoration-skip-ink: none;
 }
 
 .ticks {
@@ -945,8 +949,6 @@
 @media (max-width: 600px) {
   .herox h1 em {
     display: inline;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
   }
 }
 .faqrow { display: grid; grid-template-columns: minmax(0, 1fr) 230px; gap: 36px; align-items: end; margin-top: 8px; }
