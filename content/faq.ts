@@ -10,7 +10,7 @@ export const FAQ = [
   {
     group: "Courses and learning",
     items: [
-      { q: "What is in a course?", a: "Each unit has video lectures, notes, important questions, flashcards, mind maps and a quiz." },
+      { q: "What is in a course?", a: "Each unit has video lectures*, notes, important questions, flashcards, mind maps and a quiz. *Video lectures are available only for math subjects." },
       { q: "How does the quiz work?", a: "Every attempt shows five questions drawn from the unit's bank. Quizzes are for practice and grading: they show how ready you are, and they do not earn mudras on their own." },
       { q: "Why is a unit locked?", a: "The first unit of a course is free; the others open once you buy the course." },
     ],
