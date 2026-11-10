@@ -6,6 +6,7 @@ import { useEffect, useMemo, useState } from "react";
 import StudentGate from "@/components/StudentGate";
 import { auth } from "@/lib/firebase";
 import { addToCart, type Course, getCart, getCensus, listCourses, PLAN } from "@/lib/student";
+import NotifyButton from "@/components/NotifyButton";
 import { availability, blurb, CourseImage, Desc, inr, Members } from "@/components/shop";
 
 export default function CoursesClient() {
@@ -63,6 +64,7 @@ function Courses({ user }: { user: User }) {
           <h1 style={{ fontSize: 40, letterSpacing: -1, margin: 0 }}>Your courses</h1>
           <p className="muted" style={{ margin: 0 }}>Hi {user.displayName?.split(" ")[0] ?? "there"}, these are your courses.</p>
         </div>
+        <NotifyButton className="acct-link" />
         <a className="acct-link" href="/cart">Your cart</a>
         <button className="acct-link" style={{ marginLeft: 12 }} onClick={() => signOut(auth)}>Sign out</button>
       </div>

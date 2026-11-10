@@ -8,6 +8,7 @@ import Testimonials from "@/components/Testimonials";
 import { ArrowRight, BookOpenCheck, CalendarCheck, Check, ClipboardCheck, FileText, Flame, ListChecks, Moon, Network, Sparkles, Target, Trophy, Zap } from "lucide-react";
 import { FAQ } from "@/content/faq";
 import "./home.css";
+import NotifyButton from "@/components/NotifyButton";
 import { DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata = {
@@ -75,6 +76,7 @@ export default function Home() {
               <div className="ctas">
                 <Link className="big yellow" href="/courses">Get your courses</Link>
                 <a className="big ghostw" href="#download">Get the app</a>
+                <NotifyButton className="big ghostw" />
               </div>
               <p className="fine">Live now on Android, iOS, macOS and Windows</p>
             </div>
