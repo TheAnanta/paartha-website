@@ -5,12 +5,6 @@ import { createPortal } from "react-dom";
 
 /** Step-by-step "Add to Home Screen" help for iPhone Safari. */
 export default function InstallDialog({ onClose }: { onClose: () => void }) {
-  // Safari cannot open "Add to Home Screen" directly, but from a tap it can open the Share menu, where that action lives.
-  const canShare = typeof navigator !== "undefined" && typeof navigator.share === "function";
-  const openShare = async () => {
-    if (canShare) { try { await navigator.share({ title: "Paartha", url: window.location.origin }); } catch { /* cancelled */ } }
-    onClose();
-  };
   const box = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const opener = document.activeElement as HTMLElement | null;
@@ -39,11 +33,11 @@ export default function InstallDialog({ onClose }: { onClose: () => void }) {
           <h2 id="id-title">Add Paartha to your Home Screen</h2>
           <p>iPhone only allows notifications for apps on the Home Screen. It takes about ten seconds:</p>
           <ol className="id-steps">
-            <li>{canShare ? <>Tap <b>Open Share menu</b> below (or the <b>Share</b> button, the square with an arrow, at the bottom of the screen).</> : <>Tap the <b>Share</b> button in Safari (the square with an arrow, at the bottom of the screen).</>}</li>
+            <li>Close this, then tap the <b>Share</b> button in Safari&apos;s toolbar (the square with an arrow, at the bottom of the screen).</li>
             <li>Scroll down and tap <b>Add to Home Screen</b>, then <b>Add</b>.</li>
             <li>Open <b>Paartha</b> from your Home Screen and tap <b>Notify me</b>.</li>
           </ol>
-          <div className="pp-row"><button type="button" className="pp-yes" onClick={openShare}>{canShare ? "Open Share menu" : "Got it"}</button></div>
+          <div className="pp-row"><button type="button" className="pp-yes" onClick={onClose}>Got it</button></div>
         </div>
       </div>
     </div>,

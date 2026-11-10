@@ -17,7 +17,7 @@ export default function SarathiPage() {
         <h1 className="h2">Team</h1>
         <p className="sub">Sarathi: the people behind Paartha.</p>
         <div className="pgrid">
-          {SARATHI.map((m, i) => (<PersonCard p={m} i={i} href={`/sarathi/${slugify(m.name)}`} key={m.name} />))}
+          {SARATHI.map((m, i) => (<PersonCard p={m} i={i} href={`/sarathi/${slugify(m.name)}`} key={m.name} team />))}
         </div>
       </main>
       <Footer />

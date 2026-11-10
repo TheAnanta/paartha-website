@@ -1139,5 +1139,5 @@
 .installsteps li { margin-bottom: 6px; }
 .installsteps { background: rgba(20, 32, 74, .86); border-radius: 16px; padding: 14px 16px 10px 34px; }
 .installnote { background: rgba(20, 32, 74, .6); border-radius: 12px; padding: 8px 12px; display: inline-block; }
-/* Role / year chips: red with navy text */
-.edubadge { background: #942c26; color: #f5f0e6; }
+/* Team (Sarathi) role chips: cream on red */
+.edubadge.team { background: #942c26; color: #f5f0e6; }

@@ -169,7 +169,7 @@ export default function Home() {
           <h2 className="h2">Team</h2>
           <p className="sub">Sarathi: the people behind Paartha.</p>
           <div className="pgrid">
-            {SARATHI.map((m, i) => (<PersonCard p={m} i={i} href={`/sarathi/${slugify(m.name)}`} key={m.name} />))}
+            {SARATHI.map((m, i) => (<PersonCard p={m} i={i} href={`/sarathi/${slugify(m.name)}`} key={m.name} team />))}
           </div>
           <Link className="seeall" href="/sarathi">Meet the whole team →</Link>
         </section>

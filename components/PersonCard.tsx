@@ -6,7 +6,7 @@ const MAX_COURSES = 2;
 export type Person = { name: string; badge?: string; courses?: string[]; photo?: string };
 
 /** One person card; the whole card links to their own page (/educators/<slug> or /sarathi/<slug>). */
-export default function PersonCard({ p, i, href, hidden = false }: { p: Person; i: number; href: string; hidden?: boolean }) {
+export default function PersonCard({ p, i, href, hidden = false, team = false }: { p: Person; i: number; href: string; hidden?: boolean; team?: boolean }) {
   const courses = p.courses ?? [];
   return (
     <Link href={href} className="educard" tabIndex={hidden ? -1 : undefined} aria-label={hidden ? undefined : p.name}>
@@ -18,7 +18,7 @@ export default function PersonCard({ p, i, href, hidden = false }: { p: Person; 
         )}
       </div>
       <h3>{p.name}</h3>
-      {p.badge && <span className="edubadge">{p.badge}</span>}
+      {p.badge && <span className={team ? "edubadge team" : "edubadge"}>{p.badge}</span>}
       {courses.length > 0 && (
         <ul>
           {courses.slice(0, MAX_COURSES).map((c, k) => (<li key={c} className={k > 0 ? "edu-c2" : undefined}>{c}</li>))}
