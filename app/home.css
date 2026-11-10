@@ -1125,12 +1125,12 @@
 .notifytext { flex: 1 1 320px; }
 @media (max-width: 700px) { .notifyimg { width: 100%; } }
 /* Notify card: Kavya's wide picture is the background, text and button sit on the dark right side */
-.notifycard { border: 3px solid #14204a; border-radius: 28px; box-shadow: 6px 6px 0 #14204a; background-size: cover; background-position: left center; min-height: 320px; display: flex; align-items: center; justify-content: flex-end; padding: 36px 44px; overflow: hidden; }
+.notifycard { background-image: url(/home/kavya_wide.webp); border: 3px solid #14204a; border-radius: 28px; box-shadow: 6px 6px 0 #14204a; background-size: cover; background-position: left center; min-height: 320px; display: flex; align-items: center; justify-content: flex-end; padding: 36px 44px; overflow: hidden; }
 .notifycard .notifytext { flex: none; width: min(52%, 560px); color: #fff; }
 .notifycard h2 { margin: 0 0 10px; font-size: clamp(26px, 3.4vw, 40px); line-height: 1.08; color: #fff; text-shadow: 0 2px 0 rgba(0, 0, 0, .35); }
 .notifycard p { margin: 0 0 20px; color: #ffffffe0; font-size: 17px; text-shadow: 0 1px 0 rgba(0, 0, 0, .35); }
 .notifycard .big { display: inline-block; }
 @media (max-width: 800px) {
-  .notifycard { min-height: 0; align-items: flex-end; justify-content: flex-start; padding: 250px 22px 24px; background-position: left top; background-size: auto 230px; background-repeat: no-repeat; background-color: #3c2c3f; }
+  .notifycard { background-image: url(/home/kavya_tall.webp); min-height: 560px; align-items: flex-start; justify-content: flex-start; padding: 30px 22px 24px; background-position: center bottom; background-size: cover; background-color: #3c2c3f; }
   .notifycard .notifytext { width: 100%; }
 }
