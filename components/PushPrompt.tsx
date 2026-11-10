@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { enableWebPush, webPushConfigured } from "@/lib/webpush";
+import { enableWebPush, lastWebPushError, webPushConfigured } from "@/lib/webpush";
 
 const KEY = "paartha-push-prompt";
 const SNOOZE_MS = 30 * 24 * 60 * 60 * 1000;
-const DELAY_MS = 2500;
+const DELAY_MS = 1000;
 
 const snoozed = () => {
   try { const t = Number(localStorage.getItem(KEY)); return t > 0 && Date.now() - t < SNOOZE_MS; } catch { return false; }
@@ -16,6 +16,7 @@ const snooze = () => { try { localStorage.setItem(KEY, String(Date.now())); } ca
 export default function PushPrompt() {
   const [open, setOpen] = useState(false);
   const [state, setState] = useState<"ask" | "busy" | "done" | "error" | "blocked">("ask");
+  const [detail, setDetail] = useState("");
   const box = useRef<HTMLDivElement>(null);
   const opener = useRef<Element | null>(null);
 
@@ -57,7 +58,7 @@ export default function PushPrompt() {
     const r = await enableWebPush();
     if (r === "subscribed") { snooze(); setState("done"); setTimeout(() => setOpen(false), 2200); }
     else if (r === "denied") { snooze(); setState("blocked"); }
-    else setState("error");
+    else { setDetail(r === "unsupported" ? "This browser does not support push notifications." : lastWebPushError); setState("error"); }
   };
 
   return (
@@ -83,7 +84,7 @@ export default function PushPrompt() {
               <p id="pp-body">
                 We&apos;d love to send you notifications: exam prep tips, new subject content and exam-week reminders. It&apos;s occasional, never spammy, and you can turn it off any time in your browser settings.
               </p>
-              {state === "error" && <p className="pp-err" role="alert">Couldn&apos;t turn notifications on. Please try again.</p>}
+              {state === "error" && <p className="pp-err" role="alert">Couldn&apos;t turn notifications on. Please try again.{detail && <small className="pp-detail">{detail}</small>}</p>}
               <div className="pp-row">
                 <button type="button" className="pp-yes" onClick={yes} disabled={state === "busy"}>{state === "busy" ? "Turning on..." : "Yes, I'm in"}</button>
                 <button type="button" className="pp-no" onClick={() => close(true)} disabled={state === "busy"}>Not interested</button>

@@ -9,6 +9,7 @@ const config = {
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "paartha.firebaseapp.com",
   projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "paartha",
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:1088270011688:web:83b737496c2dd5882d541d",
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "1088270011688",
 };
 
 export const firebaseApp = getApps().length ? getApp() : initializeApp(config);

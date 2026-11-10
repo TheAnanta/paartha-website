@@ -174,13 +174,13 @@ export default function Home() {
           <Link className="seeall" href="/sarathi">Meet the whole team →</Link>
         </section>
 
-        <section className="notifyband" id="notify">
-          <div className="wrap">
-            <div>
+        <section className="wrap sec" id="notify">
+          <div className="notifycard" style={{ backgroundImage: "url(/home/kavya_wide.webp)" }} role="img" aria-label="Kavya, a Paartha student character, frowning at her syllabus before an exam">
+            <div className="notifytext">
               <h2>Be notified of exam updates and new content</h2>
               <p>Exam prep tips, new subject content and exam-week reminders. Occasional, and you can turn it off any time in your browser settings.</p>
+              <NotifyButton className="big yellow" />
             </div>
-            <NotifyButton className="big" />
           </div>
         </section>
 

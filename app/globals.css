@@ -2698,3 +2698,4 @@ body .authform .acct-card {
 @keyframes ppfade { from { opacity: 0 } }
 @keyframes pppop { from { opacity: 0; transform: translateY(14px) scale(.97) } }
 @media (prefers-reduced-motion: reduce) { .pp-back, .pp-box { animation: none; } }
+.pp-detail { display: block; margin-top: 4px; font-weight: 400; font-size: 12px; opacity: .8; word-break: break-word; }
