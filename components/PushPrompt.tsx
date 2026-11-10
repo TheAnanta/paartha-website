@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { enableWebPush, lastWebPushError, webPushConfigured } from "@/lib/webpush";
+import { enableWebPush, warmUpWebPush, lastWebPushError, webPushConfigured } from "@/lib/webpush";
 
 const KEY = "paartha-push-prompt";
 const SNOOZE_MS = 30 * 24 * 60 * 60 * 1000;
@@ -22,6 +22,7 @@ export default function PushPrompt() {
 
   useEffect(() => {
     if (!webPushConfigured() || typeof Notification === "undefined" || !("serviceWorker" in navigator) || !("PushManager" in window)) return;
+    warmUpWebPush();
     if (Notification.permission !== "default" || snoozed()) return;
     const t = setTimeout(() => { opener.current = document.activeElement; setOpen(true); }, DELAY_MS);
     return () => clearTimeout(t);

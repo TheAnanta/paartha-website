@@ -8,6 +8,7 @@ export function Header({ cta = true }: { cta?: boolean }) {
       <Link href="/" className="brand">PAARTHA<span>.</span></Link>
       <nav>
         <Link href="/educators">Educators</Link>
+        <Link href="/sarathi">Team</Link>
         <Link href="/support">Support</Link>
         <Link href="/terms">Terms</Link>
         <Link href="/privacy">Privacy</Link>
