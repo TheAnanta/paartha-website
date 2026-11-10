@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MobileMenu from "./MobileMenu";
 
 export const SUPPORT_EMAIL = process.env.NEXT_PUBLIC_SUPPORT_EMAIL || "paartha@theananta.in";
 
@@ -6,7 +7,7 @@ export function Header({ cta = true }: { cta?: boolean }) {
   return (
     <header className="site wrap">
       <Link href="/" className="brand">PAARTHA<span>.</span></Link>
-      <nav>
+      <nav className="navdesk">
         <Link href="/educators">Educators</Link>
         <Link href="/sarathi">Team</Link>
         <Link href="/support">Support</Link>
@@ -15,6 +16,7 @@ export function Header({ cta = true }: { cta?: boolean }) {
         <Link href="/account">Account</Link>
         {cta && <Link href="/courses" className="navcta">Get courses</Link>}
       </nav>
+      <MobileMenu cta={cta} />
     </header>
   );
 }

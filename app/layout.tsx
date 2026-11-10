@@ -8,6 +8,8 @@ const funnel = Funnel_Sans({ subsets: ["latin"], display: "swap" });
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
+  icons: { icon: "/icon-192.png", apple: "/apple-touch-icon.png" },
+  appleWebApp: { capable: true, title: "Paartha", statusBarStyle: "black-translucent" },
   title: { default: "Paartha: GITAM exam prep app for notes, important questions and quizzes", template: "%s · Paartha" },
   description: DESCRIPTION,
   keywords: KEYWORDS,

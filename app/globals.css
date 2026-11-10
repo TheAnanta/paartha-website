@@ -2699,3 +2699,19 @@ body .authform .acct-card {
 @keyframes pppop { from { opacity: 0; transform: translateY(14px) scale(.97) } }
 @media (prefers-reduced-motion: reduce) { .pp-back, .pp-box { animation: none; } }
 .pp-detail { display: block; margin-top: 4px; font-weight: 400; font-size: 12px; opacity: .8; word-break: break-word; }
+
+/* Phone header: Get courses + hamburger */
+header.site { position: relative; }
+.navmob { display: none; }
+@media (max-width: 760px) {
+  header.site nav.navdesk { display: none; }
+  .navmob { display: flex; align-items: center; gap: 10px; }
+  .navmob .navcta { text-decoration: none; background: #ffc933; color: #14204a; box-shadow: 0 3px 0 #14204a; padding: 8px 16px; border-radius: 999px; font-weight: 700; margin: 0; }
+  .burger { width: 44px; height: 44px; border-radius: 12px; border: 3px solid #14204a; background: #fff; color: #14204a; display: grid; place-items: center; cursor: pointer; padding: 0; }
+  .mobback { position: fixed; inset: 0; z-index: 40; background: rgba(20, 32, 74, .35); }
+  .mobmenu { position: absolute; z-index: 41; top: calc(100% - 6px); right: 24px; left: 24px; margin: 0; padding: 8px; list-style: none; background: #fff; border: 3px solid #14204a; border-radius: 20px; box-shadow: 5px 5px 0 #14204a; }
+  .mobmenu a { display: block; padding: 14px 16px; border-radius: 12px; font-weight: 700; font-size: 18px; color: #14204a; text-decoration: none; }
+  .mobmenu a:hover, .mobmenu a:focus-visible { background: #fff3c2; }
+}
+.id-steps { margin: 14px 0 0; padding-left: 22px; font-size: 15px; line-height: 1.5; color: var(--ink); }
+.id-steps li { margin-bottom: 8px; }

@@ -4,14 +4,14 @@ import { slugify } from "./educators";
 export type TeamMember = { name: string; badge: string; photo?: string };
 
 export const SARATHI: TeamMember[] = [
-  { name: "Manas Malla", badge: "Developer", photo: "/educators/manas.webp" },
-  { name: "Gagana Bandaru", badge: "UX & Product Manager", photo: "/educators/gagana.webp" },
-  { name: "Deva Harshini Mandali", badge: "Founding team", photo: "/educators/deva.webp" },
-  { name: "Kaarthikeyani", badge: "AI engineer", photo: "/educators/kaarthikeyani.webp" },
-  { name: "Hema Sree", badge: "AI engineer", photo: "/educators/hema.webp" },
-  { name: "Satwika Rejeti", badge: "Marketing lead & operations", photo: "/educators/satwika.webp" },
-  { name: "Chaitanya Sameer Chalasani", badge: "Content review & finances", photo: "/educators/chaitanya.webp" },
-  { name: "Raja Reddy Maram", badge: "Operations intern" },
+  { name: "Manas Malla", badge: "Software Developer", photo: "/educators/manas.webp" },
+  { name: "Gagana Bandaru", badge: "UX Designer & Product Manager", photo: "/educators/gagana.webp" },
+  { name: "Deva Harshini Mandali", badge: "Founding Team Member", photo: "/educators/deva.webp" },
+  { name: "Kaarthikeyani", badge: "AI Engineer", photo: "/educators/kaarthikeyani.webp" },
+  { name: "Hema Sree", badge: "AI Engineer", photo: "/educators/hema.webp" },
+  { name: "Satwika Rejeti", badge: "Marketing & Operations Lead", photo: "/educators/satwika.webp" },
+  { name: "Chaitanya Sameer Chalasani", badge: "Content Review & Finance", photo: "/educators/chaitanya.webp" },
+  { name: "Raja Reddy Maram", badge: "Operations Intern" },
 ];
 
 export { slugify };
