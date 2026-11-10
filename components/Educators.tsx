@@ -1,28 +1,5 @@
-import { EDUCATORS, type Educator } from "@/content/educators";
-
-const MAX_COURSES = 2;
-const TONES = ["navy", "red", "yellow"] as const;
-
-function Card({ e, i }: { e: Educator; i: number }) {
-  return (
-    <article className="educard">
-      <div className={`eduav tone-${TONES[i % 3]}`}>
-        {e.photo ? (
-          <img src={e.photo} alt={e.name} />
-        ) : (
-          <svg viewBox="0 0 64 64" aria-hidden><circle cx="32" cy="24" r="12" /><path d="M8 64c0-15 11-25 24-25s24 10 24 25z" /></svg>
-        )}
-      </div>
-      <h3>{e.name}</h3>
-      <span className="edubadge">{e.badge}</span>
-      <ul>
-        {e.courses.slice(0, MAX_COURSES).map((c, k) => (<li key={c} className={k > 0 ? "edu-c2" : undefined}>{c}</li>))}
-        {e.courses.length > MAX_COURSES && <li className="edumore edu-pd" title={e.courses.slice(MAX_COURSES).join(", ")}>+{e.courses.length - MAX_COURSES}</li>}
-        {e.courses.length > 1 && <li className="edumore edu-pm" title={e.courses.slice(1).join(", ")}>+{e.courses.length - 1}</li>}
-      </ul>
-    </article>
-  );
-}
+import { EDUCATORS, slugify } from "@/content/educators";
+import PersonCard from "./PersonCard";
 
 /** The people behind the courses, in two rows that drift in opposite directions (still for reduced motion). */
 export default function Educators() {
@@ -33,8 +10,8 @@ export default function Educators() {
       {rows.map((row, r) => (
         <div className={`edurow${r === 1 ? " rev" : ""}`} key={r}>
           <div className="edutrack">
-            {row.map((e, i) => (<Card e={e} i={i + r * half} key={e.name} />))}
-            {row.map((e, i) => (<div className="edudup" key={`d-${e.name}`} aria-hidden><Card e={e} i={i + r * half} /></div>))}
+            {row.map((e, i) => (<PersonCard p={e} i={i + r * half} href={`/educators/${slugify(e.name)}`} key={e.name} />))}
+            {row.map((e, i) => (<div className="edudup" key={`d-${e.name}`} aria-hidden><PersonCard p={e} i={i + r * half} href={`/educators/${slugify(e.name)}`} hidden /></div>))}
           </div>
         </div>
       ))}

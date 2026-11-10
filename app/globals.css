@@ -2680,3 +2680,21 @@ body .authform .acct-card {
   background: #ffc933;
   z-index: 0;
 }
+/* Web-push opt-in dialog */
+.pp-back { position: fixed; inset: 0; z-index: 1000; background: rgba(20, 28, 48, .6); display: flex; align-items: center; justify-content: center; padding: 16px; animation: ppfade .2s ease-out; }
+.pp-box { position: relative; background: #fff; color: var(--ink); border-radius: 22px; width: 100%; max-width: 440px; max-height: calc(100dvh - 32px); overflow: auto; box-shadow: 0 24px 60px rgba(0, 0, 0, .35); animation: pppop .25s ease-out; }
+.pp-img { display: block; width: 100%; height: auto; border-radius: 22px 22px 0 0; }
+.pp-text { padding: 20px 22px 24px; }
+.pp-text h2 { margin: 0 0 8px; font-size: 22px; line-height: 1.2; letter-spacing: -.3px; color: var(--nautilus); }
+.pp-text p { margin: 0; font-size: 15px; line-height: 1.5; color: var(--ink); opacity: .85; }
+.pp-err { margin-top: 10px !important; color: var(--couture); opacity: 1 !important; font-weight: 600; }
+.pp-row { display: flex; gap: 10px; margin-top: 18px; flex-wrap: wrap; }
+.pp-row button { flex: 1 1 150px; border-radius: 999px; padding: 13px 18px; font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; }
+.pp-yes { background: #eab830; color: #152348; border: 2px solid #152348; }
+.pp-no { background: transparent; color: var(--ink); border: 2px solid var(--line); }
+.pp-row button:disabled { opacity: .6; cursor: default; }
+.pp-x { position: absolute; top: 10px; right: 10px; width: 36px; height: 36px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, .92); color: #152348; font-size: 24px; line-height: 1; cursor: pointer; }
+.pp-box button:focus-visible { outline: 3px solid #eab830; outline-offset: 2px; }
+@keyframes ppfade { from { opacity: 0 } }
+@keyframes pppop { from { opacity: 0; transform: translateY(14px) scale(.97) } }
+@media (prefers-reduced-motion: reduce) { .pp-back, .pp-box { animation: none; } }

@@ -1,6 +1,9 @@
 /** The people who wrote and reviewed the courses. `photo` is a path under /public (empty until we have the real picture). */
 export type Educator = { name: string; badge: string; courses: string[]; photo?: string };
 
+/** URL slug for a person's own page, e.g. "Manas Malla" -> "manas-malla". */
+export const slugify = (name: string) => name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+
 export const EDUCATORS: Educator[] = [
   { name: "Manas Malla", badge: "Ex-GITAMite", courses: ["Object Oriented Programming", "Computer Organization & Architecture", "Computer Graphics & Multimedia", "Total Quality Management", "Pattern Recognition & ML"], photo: "/educators/manas.webp" },
   { name: "Nithin Raghavendra", badge: "Ex-GITAMite", courses: ["Project Management"], photo: "/educators/nithin.webp" },
@@ -16,4 +19,5 @@ export const EDUCATORS: Educator[] = [
   { name: "Gagana Bandaru", badge: "Junior year", courses: ["Computer Graphics & Multimedia"], photo: "/educators/gagana.webp" },
   { name: "Deva Harshini Mandali", badge: "Senior year", courses: ["Building Agentic AI Systems"], photo: "/educators/deva.webp" },
   { name: "Mohan Tanuj Ponasanapalli", badge: "Senior year", courses: ["Adhoc and Sensor Networks"], photo: "/educators/mohan.webp" },
+  { name: "Avantika Manoj Nair", badge: "Sophomore year", courses: ["Computer Organization & Architecture"] },
 ];

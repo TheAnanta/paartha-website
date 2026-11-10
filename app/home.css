@@ -1107,3 +1107,17 @@
   .edumarq { margin-left: -24px; margin-right: -24px; }
   .edurow { padding-left: 0; padding-right: 0; -webkit-mask-image: none; mask-image: none; }
 }
+
+/* Full-page people grids (/educators, /sarathi) and the home sections around them */
+.pagehead { padding-top: 40px; padding-bottom: 60px; }
+.pgrid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 24px; margin-top: 32px; }
+.pgrid .educard { width: auto; }
+.educard { text-decoration: none; transition: transform .15s ease, box-shadow .15s ease; }
+.educard:hover, .educard:focus-visible { transform: translate(-2px, -2px); box-shadow: 7px 7px 0 #14204a; }
+.seeall { display: inline-block; margin-top: 22px; font-weight: 800; color: #14204a; text-decoration: underline; text-underline-offset: 4px; }
+.notifyband { background: #fff7d6; border-top: 3px solid #14204a; border-bottom: 3px solid #14204a; margin-top: 76px; padding: 48px 0; }
+.notifyband .wrap { display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.notifyband h2 { margin: 0 0 8px; font-size: clamp(24px, 3.4vw, 36px); color: #14204a; line-height: 1.1; }
+.notifyband p { margin: 0; color: #14204ab3; font-size: 17px; max-width: 560px; }
+.notifyband .big { background: #14204a; color: #fff; border: 3px solid #14204a; }
+@media (max-width: 700px) { .pgrid { grid-template-columns: repeat(2, 1fr); gap: 14px; } .pgrid .educard { padding: 16px 10px 14px; } }

@@ -9,6 +9,9 @@ import { ArrowRight, BookOpenCheck, CalendarCheck, Check, ClipboardCheck, FileTe
 import { FAQ } from "@/content/faq";
 import "./home.css";
 import NotifyButton from "@/components/NotifyButton";
+import PushPrompt from "@/components/PushPrompt";
+import PersonCard from "@/components/PersonCard";
+import { SARATHI, slugify } from "@/content/sarathi";
 import { DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata = {
@@ -62,6 +65,7 @@ export default function Home() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld).replace(/</g, "\\u003c") }} />
       <div className="topbar"><Link href="/courses">Paartha is live · Get your courses now <ArrowRight size={16} aria-hidden /></Link></div>
       <Header />
+      <PushPrompt />
       <main className="hv">
         <section className="herox">
           <div className="wrap herogrid">
@@ -76,7 +80,6 @@ export default function Home() {
               <div className="ctas">
                 <Link className="big yellow" href="/courses">Get your courses</Link>
                 <a className="big ghostw" href="#download">Get the app</a>
-                <NotifyButton className="big ghostw" />
               </div>
               <p className="fine">Live now on Android, iOS, macOS and Windows</p>
             </div>
@@ -159,6 +162,26 @@ export default function Home() {
           <h2 className="h2">Meet our Educators</h2>
           <p className="sub">Every course is written and reviewed by students and alumni who have been through these exact courses, so it comes from people who know the exam, not from a template.</p>
           <Educators />
+          <Link className="seeall" href="/educators">See all educators →</Link>
+        </section>
+
+        <section className="wrap sec" id="sarathi">
+          <h2 className="h2">Team</h2>
+          <p className="sub">Sarathi: the people behind Paartha.</p>
+          <div className="pgrid">
+            {SARATHI.map((m, i) => (<PersonCard p={m} i={i} href={`/sarathi/${slugify(m.name)}`} key={m.name} />))}
+          </div>
+          <Link className="seeall" href="/sarathi">Meet the whole team →</Link>
+        </section>
+
+        <section className="notifyband" id="notify">
+          <div className="wrap">
+            <div>
+              <h2>Be notified of exam updates and new content</h2>
+              <p>Exam prep tips, new subject content and exam-week reminders. Occasional, and you can turn it off any time in your browser settings.</p>
+            </div>
+            <NotifyButton className="big" />
+          </div>
         </section>
 
         <section className="nband">
