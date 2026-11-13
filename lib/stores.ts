@@ -5,9 +5,6 @@ export const PLAY_STORE_URL = process.env.NEXT_PUBLIC_PLAY_STORE_URL || "https:/
 // The Android APK, hosted on R2 until the Play Store listing goes live (expected by 9 November).
 export const ANDROID_APK_URL = process.env.NEXT_PUBLIC_ANDROID_APK_URL || "https://pub-289abb1a16f648c982cfeef6252aa000.r2.dev/binaries/Paartha%20-%20Exam%20Prep%20%26%20Study%20-%20Version%201.0.0%20(190208).apk";
 
-// The public TestFlight beta, until the App Store listing is public (expected by 9 November).
-export const TESTFLIGHT_URL = process.env.NEXT_PUBLIC_TESTFLIGHT_URL || "https://testflight.apple.com/join/Q6dBrfQ6";
-
 // The macOS installer, hosted on R2.
 export const MACOS_DMG_URL = process.env.NEXT_PUBLIC_MACOS_DMG_URL || "https://pub-289abb1a16f648c982cfeef6252aa000.r2.dev/binaries/Paartha%20-%20Exam%20Prep%20%26%20Study%20-%20Version%201.0.0%20(10140710).dmg";
 
