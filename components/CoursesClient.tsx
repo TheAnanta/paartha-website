@@ -3,6 +3,7 @@
 import { signOut, type User } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect, useMemo, useState } from "react";
+import GetApp from "@/components/GetApp";
 import StudentGate from "@/components/StudentGate";
 import { auth } from "@/lib/firebase";
 import { addToCart, type Course, getCart, getCensus, listCourses, PLAN } from "@/lib/student";
@@ -68,6 +69,8 @@ function Courses({ user }: { user: User }) {
         <a className="acct-link" href="/cart">Your cart</a>
         <button className="acct-link" style={{ marginLeft: 12 }} onClick={() => signOut(auth)}>Sign out</button>
       </div>
+
+      <GetApp />
 
       <section className="acct-card prereg">
         <p className="label">{PLAN.name} · {PLAN.tag}</p>

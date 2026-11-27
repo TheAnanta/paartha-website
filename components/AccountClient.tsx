@@ -2,6 +2,7 @@
 
 import { ArrowRight, AtSign, BookOpen, Coins, MessageCircle } from "lucide-react";
 import AuthShell from "@/components/AuthShell";
+import GetApp from "@/components/GetApp";
 import { AppleLogo, GoogleLogo } from "@/components/AuthLogos";
 import { GoogleAuthProvider, OAuthProvider, onAuthStateChanged, signInWithPopup, signOut, type User } from "firebase/auth";
 import { useCallback, useEffect, useState } from "react";
@@ -151,6 +152,8 @@ export default function AccountClient() {
       </section>
 
       {message && <p className={`acct-msg ${message.kind}`}>{message.text}</p>}
+
+      <GetApp />
 
       <section className="acct-card">
         <h2>Your details</h2>
